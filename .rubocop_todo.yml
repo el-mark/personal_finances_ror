@@ -56,6 +56,13 @@ Style/FrozenStringLiteralComment:
     - 'config.ru'
     - 'test/application_system_test_case.rb'
     - 'test/test_helper.rb'
+    - 'config/application.rb'
+    - 'config/environments/test.rb'
+    - 'config/initializers/assets.rb'
+    - 'config/environment'
+    - 'config/environments/development'
+    - 'config/environments/production'
+    - 'config/importmap'
 
 # Offense count: 35
 # This cop supports safe autocorrection (--autocorrect).
