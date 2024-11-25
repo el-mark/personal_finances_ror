@@ -10,14 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_25_155911) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_25_185921) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "email_transactions", force: :cascade do |t|
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "scraped_email_id"
+    t.index ["scraped_email_id"], name: "index_email_transactions_on_scraped_email_id"
+  end
 
   create_table "emails", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "scraped_emails", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "body"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -32,8 +46,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_25_155911) do
     t.integer "amount", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["email_id"], name: "index_transactions_on_email_id"
   end
 
+  add_foreign_key "email_transactions", "scraped_emails"
   add_foreign_key "transactions", "emails"
 end

@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-    enum currency: { usd: 0, pen: 1 }
+    enum :currency, [ :usd, :pen ]
 
     belongs_to :email
 end
