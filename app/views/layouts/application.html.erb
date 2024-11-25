@@ -23,6 +23,13 @@
   </head>
 
   <body>
+    <ul>
+      <li><%= link_to "home", root_path %></li>
+      <li><%= link_to "transaction_table", transaction_table_path %></li>
+      <li><%= link_to "email_form", email_form_path %></li>
+      <li><%= link_to "chatgpt_connection", chatgpt_connection_path %></li>
+    </ul>
+
     <%= yield %>
   </body>
 </html>

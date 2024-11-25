@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "index#home"
+  get "transaction_table", to: "index#transaction_table"
+  get "email_form", to: "index#email_form"
+  get "chatgpt_connection", to: "index#chatgpt_connection"
 end
 
 # rubocop:enable Style/FrozenStringLiteralComment
