@@ -28,11 +28,11 @@ class IndexController < ApplicationController
                 banco: "Interbank",
                 cuenta_cargo: "Juan Perez",
                 cuenta_destino: "1234567890",
-                moneda: USD,
+                moneda: pen,
                 monto: 30
             }
 
-            moneda tiene que ser: PEN, USD o NONE
+            moneda tiene que ser: pen, usd o no_currency
 
             return only the json object
         '
@@ -45,7 +45,7 @@ class IndexController < ApplicationController
                 "banco": "Interbank",
                 "cuenta_cargo": "Ahorro Sueldo Soles 108 3094799772",
                 "cuenta_destino": "Samuel Antonio Pezua Espinoza",
-                "moneda": "PEN",
+                "moneda": "pen",
                 "monto": 13.20
             }
             ```
@@ -66,7 +66,7 @@ class IndexController < ApplicationController
             issuer: @json_data['banco'],
             source: @json_data['cuenta_cargo'],
             destination: @json_data['cuenta_destino'],
-            currency: :pen,
+            currency: @json_data['moneda'].to_sym,
             amount: @json_data['monto']
         )
     end
