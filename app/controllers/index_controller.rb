@@ -7,5 +7,67 @@ class IndexController < ApplicationController
     end
 
     def email_form; end
-    def chatgpt_connection; end
+
+    def chatgpt_connection
+        user_input = '
+            transform this transaction email text
+            "Constancia de Pago Plin
+            10 Nov 2024 11:26 AM
+            from: Interbank Servicio al Cliente <servicioalcliente@netinterbank.com.pe>
+            Código de operación:	01483653
+            Cuenta cargo:	Ahorro Sueldo Soles
+            108 3094799772
+            Destinatario:	Samuel Antonio Pezua Espinoza
+            Destino:	Plin
+            Moneda y monto:	S/ 13.20"
+
+            into a json object like this:
+            {
+                fecha: "2024-12-31",
+                codigo_de_operacion: 12345,
+                banco: "Interbank",
+                cuenta_cargo: "Juan Perez",
+                cuenta_destino: "1234567890",
+                moneda: USD,
+                monto: 30
+            }
+
+            moneda tiene que ser: PEN, USD o NONE
+
+            return only the json object
+        '
+
+
+        message = '```json
+            {
+                "fecha": "2024-12-31",
+                "codigo_de_operacion": "01483653",
+                "banco": "Interbank",
+                "cuenta_cargo": "Ahorro Sueldo Soles 108 3094799772",
+                "cuenta_destino": "Samuel Antonio Pezua Espinoza",
+                "moneda": "PEN",
+                "monto": 13.20
+            }
+            ```
+        '
+
+        parsed_message = message.gsub("```json", "").gsub("```", "")
+
+        @json_data = JSON.parse(parsed_message)
+
+        # transaction_date = Date.parse(@json_data['fecha'])
+        transaction_date = Date.parse(@json_data['fecha'])
+
+        email = Email.create(body: user_input.strip)
+        Transaction.create(
+            email: email,
+            transaction_date: transaction_date,
+            transaction_code: @json_data['codigo_de_operacion'],
+            issuer: @json_data['banco'],
+            source: @json_data['cuenta_cargo'],
+            destination: @json_data['cuenta_destino'],
+            currency: :pen,
+            amount: @json_data['monto']
+        )
+    end
 end

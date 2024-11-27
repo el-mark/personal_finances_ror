@@ -29,42 +29,25 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_173859) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "email_transactions", force: :cascade do |t|
-    t.integer "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "scraped_email_id"
-    t.index ["scraped_email_id"], name: "index_email_transactions_on_scraped_email_id"
-  end
-
   create_table "emails", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "scraped_emails", force: :cascade do |t|
+  create_table "transactions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "body"
-  end
-
-  create_table "transactions", force: :cascade do |t|
     t.bigint "email_id"
-    t.date "transaction_date", default: "2024-11-25"
+    t.date "transaction_date"
     t.string "transaction_code"
     t.string "issuer"
     t.string "source"
     t.string "destination"
     t.integer "currency", default: 0, null: false
-    t.integer "integer", default: 0, null: false
     t.integer "amount", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0
     t.index ["email_id"], name: "index_transactions_on_email_id"
   end
 
-  add_foreign_key "email_transactions", "scraped_emails"
   add_foreign_key "transactions", "emails"
 end
