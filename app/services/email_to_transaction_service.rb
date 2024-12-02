@@ -17,7 +17,7 @@ class EmailToTransactionService
                     cuenta_cargo: 'Juan Perez',
                     cuenta_destino: '1234567890',
                     moneda: USD,
-                    monto: 44
+                    monto: 4400
                 }
 
                 - moneda tiene que ser: pen, usd o no_currency.
@@ -54,7 +54,7 @@ class EmailToTransactionService
             source: @json_data["cuenta_cargo"],
             destination: @json_data["cuenta_destino"],
             currency: @json_data["moneda"].to_sym,
-            amount: @json_data["monto"]
+            amount: @json_data["monto"] * 100
         )
     end
 
@@ -87,7 +87,7 @@ class EmailToTransactionService
             source: @json_data["cuenta_cargo"],
             destination: @json_data["cuenta_destino"],
             currency: @json_data["moneda"].to_sym,
-            amount: @json_data["monto"]
+            amount: @json_data["monto"] * 100
         )
     end
 end

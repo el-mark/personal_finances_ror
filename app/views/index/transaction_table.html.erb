@@ -26,7 +26,7 @@
                     <td><%= transaction.source %></td>
                     <td><%= transaction.destination %></td>
                     <td><%= transaction.currency %></td>
-                    <td><%= transaction.amount %></td>
+                    <td><%= transaction.amount / 100.to_f %></td>
                 </tr>
             <% end %>
         </tbody>
