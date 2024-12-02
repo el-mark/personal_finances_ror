@@ -6,7 +6,18 @@ class IndexController < ApplicationController
         puts(@transactions.count)
     end
 
-    def email_form; end
+    def email_new
+        @email = Email.new
+    end
+
+    def email_create
+        @email = Email.new(email_params)
+        if @email.save
+            redirect_to root_path, notice: "Email created successfully."
+        else
+            render :email_new
+        end
+    end
 
     def chatgpt_connection
         user_input = '
@@ -62,12 +73,18 @@ class IndexController < ApplicationController
         Transaction.create(
             email: email,
             transaction_date: transaction_date,
-            transaction_code: @json_data['codigo_de_operacion'],
-            issuer: @json_data['banco'],
-            source: @json_data['cuenta_cargo'],
-            destination: @json_data['cuenta_destino'],
-            currency: @json_data['moneda'].to_sym,
-            amount: @json_data['monto']
+            transaction_code: @json_data["codigo_de_operacion"],
+            issuer: @json_data["banco"],
+            source: @json_data["cuenta_cargo"],
+            destination: @json_data["cuenta_destino"],
+            currency: @json_data["moneda"].to_sym,
+            amount: @json_data["monto"]
         )
+    end
+
+    private
+
+    def email_params
+        params.require(:email).permit(:body)
     end
 end

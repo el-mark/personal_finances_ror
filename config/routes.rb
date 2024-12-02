@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "index#home"
   get "transaction_table", to: "index#transaction_table"
-  get "email_form", to: "index#email_form"
+  get "email_new", to: "index#email_new"
+  post "email_new", to: "index#email_create"
   get "chatgpt_connection", to: "index#chatgpt_connection"
 end
 

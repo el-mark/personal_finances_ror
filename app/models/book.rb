@@ -1,2 +1,2 @@
-class Book < ApplicationRecord
-end
+# class Book < ApplicationRecord
+# end
