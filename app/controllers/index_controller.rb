@@ -1,4 +1,6 @@
 class IndexController < ApplicationController
+    before_action :authenticate_user!, except: [ :landing ]
+
     def landing; end
 
     def home; end
@@ -37,12 +39,17 @@ class IndexController < ApplicationController
         email = Email.create(body: user_input.strip)
 
         # EmailToTransactionService.new(email).test
-        EmailToTransactionService.new(email).call
+        @transaction = EmailToTransactionService.new(email).test
     end
 
     private
 
     def email_params
         params.require(:email).permit(:body)
+    end
+
+    def authenticate_user!
+        # Logic to check if the user is signed in
+        redirect_to landing_path unless user_signed_in?
     end
 end

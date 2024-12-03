@@ -1,4 +1,11 @@
-<h1>chatgpt_connection</h1>
+<h1>Nueva transacción</h1>
 <p>
-    <%= @json_data %>
+    <p>Transaction ID: <%= @transaction.id %></p>
+    <p>Transaction Date: <%= @transaction.transaction_date %></p>
+    <p>Transaction Code: <%= @transaction.transaction_code %></p>
+    <p>Issuer: <%= @transaction.issuer %></p>
+    <p>Source: <%= @transaction.source %></p>
+    <p>Destination: <%= @transaction.destination %></p>
+    <p>Currency: <%= @transaction.currency %></p>
+    <p>Amount: <%= @transaction.amount / 100.to_f %></p>
 </p>

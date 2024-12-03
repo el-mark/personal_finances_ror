@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "index#landing"
   # root "devise/sessions#new"
+  get "landing", to: "index#landing"
   get "home", to: "index#home"
   get "transaction_table", to: "index#transaction_table"
   get "email_new", to: "index#email_new"
