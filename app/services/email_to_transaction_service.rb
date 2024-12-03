@@ -1,6 +1,7 @@
 class EmailToTransactionService
-    def initialize(email)
+    def initialize(email, user)
         @email = email
+        @user = user
     end
 
     def call
@@ -17,7 +18,8 @@ class EmailToTransactionService
                     cuenta_cargo: 'Juan Perez',
                     cuenta_destino: '1234567890',
                     moneda: USD,
-                    monto: 4400
+                    monto: 4400,
+                    descripcion: 'Transferencia a Juan Perez'
                 }
 
                 - moneda tiene que ser: pen, usd o no_currency.
@@ -48,13 +50,17 @@ class EmailToTransactionService
 
         Transaction.create(
             email: @email,
+            user: @user,
             transaction_date: transaction_date,
             transaction_code: @json_data["codigo_de_operacion"],
             issuer: @json_data["banco"],
             source: @json_data["cuenta_cargo"],
             destination: @json_data["cuenta_destino"],
             currency: @json_data["moneda"].to_sym,
-            amount: @json_data["monto"] * 100
+            amount: @json_data["monto"] * 100,
+            frequency: :common,
+            category: :food,
+            description: @json_data["descripcion"]
         )
     end
 
@@ -79,8 +85,9 @@ class EmailToTransactionService
         # transaction_date = Date.parse(@json_data['fecha'])
         transaction_date = Date.parse(@json_data['fecha'])
 
-        Transaction.create(
+        transaction = Transaction.create(
             email: @email,
+            user: @user,
             transaction_date: transaction_date,
             transaction_code: @json_data["codigo_de_operacion"],
             issuer: @json_data["banco"],

@@ -5,26 +5,30 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Email ID</th>
-                <th scope="col">Transaction Date</th>
-                <th scope="col">Transaction Code</th>
-                <th scope="col">Issuer</th>
-                <th scope="col">Source</th>
-                <th scope="col">Destination</th>
-                <th scope="col">Currency</th>
-                <th scope="col">Amount</th>
+                <th scope="col">Día</th>
+                <th scope="col">Código</th>
+                <th scope="col">Banco</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Destino</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Recurrencia</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Moneda</th>
+                <th scope="col">Monto</th>
             </tr>
         </thead>
         <tbody>
             <% @transactions.each do |transaction| %>
                 <tr>
                     <td><%= transaction.id %></td>
-                    <td><%= transaction.email_id %></td>
                     <td><%= transaction.transaction_date %></td>
                     <td><%= transaction.transaction_code %></td>
                     <td><%= transaction.issuer %></td>
                     <td><%= transaction.source %></td>
                     <td><%= transaction.destination %></td>
+                    <td><%= transaction.category %></td>
+                    <td><%= transaction.frequency %></td>
+                    <td><%= transaction.description %></td>
                     <td><%= transaction.currency %></td>
                     <td><%= transaction.amount / 100.to_f %></td>
                 </tr>

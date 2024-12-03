@@ -17,7 +17,7 @@ class IndexController < ApplicationController
     def email_create
         @email = Email.new(email_params)
         if @email.save
-            EmailToTransactionService.new(@email).call
+            EmailToTransactionService.new(@email, current_user).call
             redirect_to transaction_table_path, notice: "Email created successfully."
         else
             render :email_new
