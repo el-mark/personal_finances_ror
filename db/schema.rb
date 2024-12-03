@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_03_151809) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_03_153845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_151809) do
     t.string "recipient"
     t.string "sender"
     t.string "subject"
+    t.json "json_raw_message"
   end
 
   create_table "transactions", force: :cascade do |t|
