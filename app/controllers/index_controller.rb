@@ -6,7 +6,7 @@ class IndexController < ApplicationController
     def home; end
 
     def transaction_table
-        @transactions = Transaction.all
+        @transactions = current_user.transactions.all
         puts(@transactions.count)
     end
 
