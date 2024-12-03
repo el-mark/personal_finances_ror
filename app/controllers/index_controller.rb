@@ -1,4 +1,6 @@
 class IndexController < ApplicationController
+    def landing; end
+
     def home; end
 
     def transaction_table

@@ -1,5 +1,6 @@
 # rubocop:disable Style/FrozenStringLiteralComment
 Rails.application.routes.draw do
+  devise_for :users
   resources :books
   resources :articles, except: [ :new, :edit ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -13,7 +14,9 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "index#home"
+  root "index#landing"
+  # root "devise/sessions#new"
+  get "home", to: "index#home"
   get "transaction_table", to: "index#transaction_table"
   get "email_new", to: "index#email_new"
   post "email_new", to: "index#email_create"

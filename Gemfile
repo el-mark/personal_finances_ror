@@ -70,3 +70,5 @@ end
 
 gem 'pg'
 gem "ruby-openai"
+gem 'devise'
+# gem 'rails-i18n'
