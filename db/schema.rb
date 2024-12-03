@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_03_003414) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_03_151809) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,6 +18,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_003414) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "raw_message"
+    t.string "domain"
+    t.string "recipient"
+    t.string "sender"
+    t.string "subject"
   end
 
   create_table "transactions", force: :cascade do |t|

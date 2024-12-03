@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   get "email_new", to: "index#email_new"
   post "email_new", to: "index#email_create"
   get "chatgpt_connection", to: "index#chatgpt_connection"
+
+  namespace :mailgun, constraints: { format: "json" } do
+    post "forward_email", to: "forward_email"
+  end
 end
 
 # rubocop:enable Style/FrozenStringLiteralComment
