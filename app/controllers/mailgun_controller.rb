@@ -11,7 +11,7 @@ class MailgunController < ApplicationController
             subject: email_params['subject']
         )
 
-        user = User.find_by(email: email_params['sender'])
+        user = User.find_by(email: original_email(email_params['sender']))
         # puts "email_params['sender']"
         # puts email_params['sender']
         # puts "user.present?"
@@ -21,5 +21,11 @@ class MailgunController < ApplicationController
         end
 
         render json: { message: "Email received ok" }, status: :ok
+    end
+
+    private
+
+    def original_email(email)
+        email.gsub(/\+[^@]+/, "")
     end
 end
