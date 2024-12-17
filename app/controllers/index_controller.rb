@@ -6,7 +6,7 @@ class IndexController < ApplicationController
     def home; end
 
     def transaction_table
-        @transactions = current_user.transactions.all
+        @transactions = current_user.transactions.order(transaction_date: :desc)
         puts(@transactions.count)
     end
 
