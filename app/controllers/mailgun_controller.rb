@@ -10,6 +10,16 @@ class MailgunController < ApplicationController
             recipient: email_params['recipient'],
             subject: email_params['subject']
         )
+
+        user = User.find_by(email: email_params['sender'])
+        # puts "email_params['sender']"
+        # puts email_params['sender']
+        # puts "user.present?"
+        # puts user.present?
+        if user.present? && IsEmailATransactionService.new(email).call
+            EmailToTransactionService.new(email, user).call
+        end
+
         render json: { message: "Email received ok" }, status: :ok
     end
 end
