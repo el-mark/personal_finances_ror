@@ -44,9 +44,7 @@ class TransactionsController < ApplicationController
   def destroy
     @transaction.destroy!
 
-    respond_to do |format|
-      redirect_to transactions_path, status: :see_other, notice: "Transaction was successfully destroyed."
-    end
+    redirect_to transactions_path, status: :see_other, notice: "El movimiento fue borrado con éxito."
   end
 
   private
