@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   # root "devise/sessions#new"
   get "landing", to: "index#landing"
   get "home", to: "index#home"
-  get "transactions_table", to: "index#transactions_table"
   get "email_new", to: "index#email_new"
   post "email_new", to: "index#email_create"
   get "chatgpt_connection", to: "index#chatgpt_connection"

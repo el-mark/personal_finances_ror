@@ -5,10 +5,6 @@ class IndexController < ApplicationController
 
     def home; end
 
-    def transactions_table
-        @transactions = current_user.transactions.order(transaction_date: :desc)
-    end
-
     def email_new
         @email = Email.new
     end
@@ -17,7 +13,7 @@ class IndexController < ApplicationController
         @email = Email.new(email_params)
         if @email.save
             EmailToTransactionService.new(@email, current_user).call
-            redirect_to transactions_table_path, notice: "Email created successfully."
+            redirect_to transactions_path, notice: "Email created successfully."
         else
             render :email_new
         end
