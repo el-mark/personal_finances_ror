@@ -2,6 +2,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :books
+  resources :transactions
   resources :articles, except: [ :new, :edit ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   # root "devise/sessions#new"
   get "landing", to: "index#landing"
   get "home", to: "index#home"
-  get "transaction_table", to: "index#transaction_table"
+  get "transactions_table", to: "index#transactions_table"
   get "email_new", to: "index#email_new"
   post "email_new", to: "index#email_create"
   get "chatgpt_connection", to: "index#chatgpt_connection"
