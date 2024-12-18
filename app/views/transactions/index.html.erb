@@ -34,7 +34,8 @@
                     <td><%= transaction.description %></td>
                     <td><%= transaction.currency %></td>
                     <td><%= transaction.amount / 100.to_f %></td>
-                    <td><%= link_to "ver", transaction %></td>
+                    <td><%= link_to "editar", edit_transaction_path(transaction) %></td>
+                    <td>  <%= button_to "borrar", transaction, method: :delete, data: { turbo_confirm: 'deseas borrar?' } %>
                 </tr>
             <% end %>
         </tbody>

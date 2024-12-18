@@ -3,6 +3,6 @@ class Transaction < ApplicationRecord
     enum :frequency, [ :common, :rare ]
     enum :category, [ :food, :transference, :health ]
 
-    belongs_to :email
+    belongs_to :email, optional: true
     belongs_to :user
 end

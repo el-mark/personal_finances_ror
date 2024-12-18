@@ -12,6 +12,51 @@
   <% end %>
 
   <div>
+    <%= form.label :transaction_date, style: "display: block" %>
+    <%= form.date_field :transaction_date, value: transaction.transaction_date.blank? ? Date.current : transaction.transaction_date %>
+  </div>
+
+  <div>
+    <%= form.label :transaction_code, style: "display: block" %>
+    <%= form.text_field :transaction_code %>
+  </div>
+
+  <div>
+    <%= form.label :issuer, style: "display: block" %>
+    <%= form.text_field :issuer %>
+  </div>
+
+  <div>
+    <%= form.label :source, style: "display: block" %>
+    <%= form.text_field :source %>
+  </div>
+
+  <div>
+    <%= form.label :destination, style: "display: block" %>
+    <%= form.text_field :destination %>
+  </div>
+
+  <div>
+    <%= form.label :category, style: "display: block" %>
+    <%= form.select :category, Transaction.categories.keys.map(&:to_sym) %>
+  </div>
+
+  <div>
+    <%= form.label :frequency, style: "display: block" %>
+    <%= form.select :frequency, Transaction.frequencies.keys.map(&:to_sym) %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :currency, style: "display: block" %>
+    <%= form.select :currency, Transaction.currencies.keys.map(&:to_sym) %>
+  </div>
+
+  <div>
     <%= form.label :amount, style: "display: block" %>
     <%= form.number_field :amount %>
   </div>

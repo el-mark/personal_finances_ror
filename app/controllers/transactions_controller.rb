@@ -22,10 +22,10 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
-
+    @transaction.user = current_user
 
     if @transaction.save
-      redirect_to @transaction, notice: "Transaction was successfully created."
+      redirect_to transactions_path, notice: "Transaction was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1 or /transactions/1.json
   def update
     if @transaction.update(transaction_params)
-      redirect_to @transaction, notice: "Transaction was successfully updated."
+      redirect_to transactions_path, notice: "Transaction was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -55,6 +55,9 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:amount)
+      params.require(:transaction).permit(
+        :amount, :transaction_date, :transaction_code, :issuer, :source,
+        :destination, :category, :frequency, :description, :currency
+      )
     end
 end

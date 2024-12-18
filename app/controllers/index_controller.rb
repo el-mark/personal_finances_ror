@@ -13,7 +13,7 @@ class IndexController < ApplicationController
         @email = Email.new(email_params)
         if @email.save
             EmailToTransactionService.new(@email, current_user).call
-            redirect_to transactions_path, notice: "Email created successfully."
+            redirect_to transactions_path, notice: "Se creó el nuevo movimiento a partir de un email"
         else
             render :email_new
         end
