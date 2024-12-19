@@ -29,8 +29,8 @@
                     <td><%= transaction.issuer %></td>
                     <td><%= transaction.source %></td>
                     <td><%= transaction.destination %></td>
-                    <td><%= transaction.category %></td>
-                    <td><%= transaction.frequency %></td>
+                    <td><%= t("activerecord.attributes.transaction.categories.#{transaction.category}") %></td>
+                    <td><%= t("activerecord.attributes.transaction.frequencies.#{transaction.frequency}") %></td>
                     <td><%= transaction.description %></td>
                     <td><%= transaction.currency %></td>
                     <td><%= transaction.amount / 100.to_f %></td>

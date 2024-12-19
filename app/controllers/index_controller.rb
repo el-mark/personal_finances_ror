@@ -3,7 +3,14 @@ class IndexController < ApplicationController
 
     def landing; end
 
-    def home; end
+    def home
+        @total_pen = current_user.transactions.where(
+            currency: :pen, transaction_date: Date.current.beginning_of_month..
+        ).sum(:amount) / 100.to_f
+        @total_usd = current_user.transactions.where(
+            currency: :usd, transaction_date: Date.current.beginning_of_month..
+        ).sum(:amount) / 100.to_f
+    end
 
     def email_new
         @email = Email.new

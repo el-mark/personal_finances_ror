@@ -61,7 +61,11 @@
       <%= form.label :category, style: "display: block", class: "col-form-label" %>
     </div>
     <div class="col-auto">
-      <%= form.select :category, Transaction.categories.keys.map(&:to_sym), {}, { class: "form-select" } %>
+      <%= form.select :category, 
+          Transaction.categories.keys.map { |category| [t("activerecord.attributes.transaction.categories.#{category}"), category] },
+          {}, 
+          { class: "form-select" } 
+      %>
     </div>
   </div>
 
@@ -70,7 +74,11 @@
       <%= form.label :frequency, style: "display: block", class: "col-form-label" %>
     </div>
     <div class="col-auto">
-      <%= form.select :frequency, Transaction.frequencies.keys.map(&:to_sym), {}, { class: "form-select" } %>
+      <%= form.select :frequency, 
+          Transaction.frequencies.keys.map { |frequency| [t("activerecord.attributes.transaction.frequencies.#{frequency}"), frequency] },
+          {}, 
+          { class: "form-select" } 
+      %>
     </div>
   </div>
 

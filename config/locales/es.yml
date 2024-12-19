@@ -1,0 +1,17 @@
+es:
+  hello: "Hola mundo"
+  activerecord:
+    attributes:
+      transaction:
+        categories:
+          other_category: "Otros"
+          supermarket: "Supermercado"
+          transference: "Transferencia"
+          health: Salud
+          investment: Inversión
+          entertainment: Entretenimiento
+          home: Hogar
+        frequencies:
+          common: Frecuente
+          rare: Extraordinario
+

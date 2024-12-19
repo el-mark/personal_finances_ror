@@ -25,7 +25,7 @@ class TransactionsController < ApplicationController
     @transaction.user = current_user
 
     if @transaction.save
-      redirect_to transactions_path, notice: "Transaction was successfully created."
+      redirect_to transactions_path, notice: "La transacción fue creada con éxito."
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1 or /transactions/1.json
   def update
     if @transaction.update(transaction_params)
-      redirect_to transactions_path, notice: "Transaction was successfully updated."
+      redirect_to transactions_path, notice: "La transacción fue actualizada con éxito."
     else
       render :edit, status: :unprocessable_entity
     end
