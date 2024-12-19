@@ -11,54 +11,94 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :transaction_date, style: "display: block" %>
-    <%= form.date_field :transaction_date, value: transaction.transaction_date.blank? ? Date.current : transaction.transaction_date %>
+  <div class="row g-3 align-items-center">
+    <div class="col-auto">
+      <%= form.label :transaction_date, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.date_field :transaction_date, value: transaction.transaction_date.blank? ? Date.current : transaction.transaction_date, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :transaction_code, style: "display: block" %>
-    <%= form.text_field :transaction_code %>
+  <div class="row g-3 align-items-center mt-1">
+    <div class="col-auto">
+      <%= form.label :transaction_code, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.text_field :transaction_code, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :issuer, style: "display: block" %>
-    <%= form.text_field :issuer %>
+  <div class="row g-3 align-items-center mt-1">
+    <div class="col-auto">
+      <%= form.label :issuer, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.text_field :issuer, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :source, style: "display: block" %>
-    <%= form.text_field :source %>
+  <div class="row g-3 align-items-center mt-1">
+    <div class="col-auto">
+      <%= form.label :source, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.text_area :source, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :destination, style: "display: block" %>
-    <%= form.text_field :destination %>
+  <div class="row g-3 align-items-center mt-1">
+    <div class="col-auto">
+      <%= form.label :destination, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.text_area :destination, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.select :category, Transaction.categories.keys.map(&:to_sym) %>
+  <div class="row g-3 align-items-center mt-1">
+    <div class="col-auto">
+      <%= form.label :category, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.select :category, Transaction.categories.keys.map(&:to_sym), {}, { class: "form-select" } %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :frequency, style: "display: block" %>
-    <%= form.select :frequency, Transaction.frequencies.keys.map(&:to_sym) %>
+  <div class="row g-3 align-items-center mt-1">
+    <div class="col-auto">
+      <%= form.label :frequency, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.select :frequency, Transaction.frequencies.keys.map(&:to_sym), {}, { class: "form-select" } %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="row g-3 align-items-center mt-1">
+    <div class="col-auto">
+      <%= form.label :description, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :currency, style: "display: block" %>
-    <%= form.select :currency, Transaction.currencies.keys.map(&:to_sym) %>
+  <div class="row g-3 align-items-center mt-1">
+    <div class="col-auto">
+      <%= form.label :currency, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.select :currency, Transaction.currencies.keys.map(&:to_sym), {}, { class: "form-select" } %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :amount, style: "display: block" %>
-    <%= form.number_field :amount %>
+  <div class="row g-3 align-items-center mt-1 mb-3">
+    <div class="col-auto">
+      <%= form.label :amount, style: "display: block", class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.number_field :amount, class: "form-control" %>
+    </div>
   </div>
 
   <div>
