@@ -5,4 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :transactions
+  has_many :user_emails
+
+  after_create :create_user_email
+
+  private
+
+  def create_user_email
+    unless UserEmail.find_by(address: self.email).present?
+      UserEmail.create(user: self, address: self.email)
+    end
+  end
 end

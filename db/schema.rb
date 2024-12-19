@@ -10,32 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_03_162853) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_19_152929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
-
-  create_table "alembic_version", primary_key: "version_num", id: { type: :string, limit: 32 }, force: :cascade do |t|
-  end
-
-  create_table "article", id: :serial, force: :cascade do |t|
-    t.string "title", limit: 510, null: false
-    t.text "body", null: false
-    t.string "image_url", limit: 255
-    t.string "source", limit: 510
-    t.string "source_name", limit: 64
-    t.date "created_at", null: false
-    t.integer "views", default: 0, null: false
-    t.string "storage_file_name", limit: 255
-
-    t.unique_constraint ["title"], name: "article_title_key"
-  end
-
-  create_table "comment", id: :serial, force: :cascade do |t|
-    t.text "body", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.integer "user_id", null: false
-    t.integer "article_id", null: false
-  end
 
   create_table "emails", force: :cascade do |t|
     t.text "body"
@@ -47,14 +24,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_162853) do
     t.json "json_raw_message"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.integer "employee_id"
-    t.datetime "timestamp", precision: nil
-    t.integer "kind"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "transactions", force: :cascade do |t|
     t.bigint "email_id"
     t.date "transaction_date", default: "2024-11-25"
@@ -63,7 +32,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_162853) do
     t.string "source"
     t.string "destination"
     t.integer "currency", default: 0, null: false
-    t.integer "integer", default: 0, null: false
     t.integer "amount", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -75,14 +43,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_162853) do
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
-  create_table "user", id: :serial, force: :cascade do |t|
-    t.string "email", limit: 150, null: false
-    t.string "password_hash", limit: 255, null: false
-    t.boolean "is_admin", null: false
-    t.string "lastname", limit: 150
-    t.string "name", limit: 150, null: false
-
-    t.unique_constraint ["email"], name: "user_email_key"
+  create_table "user_emails", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_emails_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,8 +63,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_162853) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "comment", "article", name: "comment_article_id_fkey"
-  add_foreign_key "comment", "user", name: "comment_user_id_fkey"
   add_foreign_key "transactions", "emails"
   add_foreign_key "transactions", "users"
+  add_foreign_key "user_emails", "users"
 end

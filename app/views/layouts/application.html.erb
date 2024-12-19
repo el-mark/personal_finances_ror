@@ -351,12 +351,14 @@
                             <hr class="my-3" />
 
                             <ul class="nav flex-column mb-auto">
-                                <li class="nav-item"></li>
+                                <% current_user.user_emails.each do |email| %>
+                                    <li class="nav-item"></li>
                                         <div class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
                                             style="color: black;">
-                                            <%= current_user.email %>
+                                                <%= email.address %>
                                         </div>
                                     </li>
+                                <% end %>
                                 <li class="nav-item">
                                     <%= button_to destroy_user_session_path, method: :delete, class: "nav-link d-flex align-items-center gap-2" do %>
                                         <svg class="bi">
