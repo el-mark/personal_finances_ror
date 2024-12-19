@@ -5,6 +5,8 @@ class EmailToTransactionService
     end
 
     def call
+        categories = Transaction.categories.keys.join(", ")
+
         prompt =
             <<~PROMPT
                 transform this transaction email text
@@ -17,6 +19,7 @@ class EmailToTransactionService
                     banco: 'Interbank',
                     cuenta_cargo: 'Juan Perez',
                     cuenta_destino: '1234567890',
+                    categoria: otros,
                     moneda: USD,
                     monto: 4400,
                     descripcion: 'Transferencia a Juan Perez'
@@ -25,10 +28,11 @@ class EmailToTransactionService
                 - moneda tiene que ser: pen, usd o no_currency.
                 - fecha es solo el año, mes y día, mas no la hora.
                 return only the json object.
+                - las categorías disponibles: #{categories}
             PROMPT
 
         client = OpenAI::Client.new
-
+        puts prompt
 
         response = client.chat(
             parameters: {
@@ -46,7 +50,7 @@ class EmailToTransactionService
         @json_data = JSON.parse(parsed_message)
 
         # transaction_date = Date.parse(@json_data['fecha'])
-        transaction_date = Date.parse(@json_data['fecha'])
+        transaction_date = Date.parse(@json_data["fecha"])
 
         Transaction.create(
             email: @email,
@@ -59,7 +63,7 @@ class EmailToTransactionService
             currency: @json_data["moneda"].to_sym,
             amount: @json_data["monto"] * 100,
             frequency: :common,
-            category: :food,
+            category: @json_data["categoria"].to_sym,
             description: @json_data["descripcion"]
         )
     end
