@@ -37,9 +37,7 @@
                     <td>
                         <div style="display: flex; justify-content: space-between;">
                             <a href="<%= edit_transaction_path(transaction) %>" class="btn btn-outline-success btn-sm">
-                                <svg class="bi">
-                                    <use xlink:href="#file-earmark-text" />
-                                </svg>
+                                <i class="bi bi-pencil-fill"></i>
                             </a>
                             <%= button_to transaction, method: :delete, class: "btn btn-outline-danger btn-sm", data: { turbo_confirm: 'deseas borrar?' } do %>
                                 <i class="bi bi-trash3-fill"></i>
@@ -52,4 +50,4 @@
     </table>
 </div>
 
-<%= link_to "Agregar movimiento", new_transaction_path %>
+<%= link_to "Agregar movimiento", new_transaction_path, class: "btn btn-outline-success btn-sm" %>
