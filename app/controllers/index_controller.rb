@@ -10,6 +10,13 @@ class IndexController < ApplicationController
         @total_usd = current_user.transactions.where(
             currency: :usd, transaction_date: Date.current.beginning_of_month..
         ).sum(:amount) / 100.to_f
+
+        @transactions_by_category = current_user.transactions.where(
+            currency: :pen, transaction_date: Date.current.beginning_of_month..
+        ).group(:category).count
+
+        @categories = Transaction.categories.keys.map(&:to_s).map(&:titleize)
+        @category_sums = [1, 2, 3, 4, 3, 2, 0]
     end
 
     def email_new

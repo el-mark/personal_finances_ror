@@ -24,3 +24,39 @@
     <p>Total dólares: <%= @total_usd %></p>
 </div>
 <%# <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> %>
+
+<div style="width: 300px;">
+    <canvas class="my-4 w-100" id="myPieChart" width="200" height="200"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Pie chart example
+    const ctx = document.getElementById('myPieChart').getContext('2d');
+    const myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+            datasets: [{
+                label: 'Total Amount',
+                data: [1, 2, 3, 4, 3, 2, 0],
+                backgroundColor: ['#FF6384', '#36A2EB', '#36A2EB', '#36A2EB', '#36A2EB', '#36A2EB', '#36A2EB'],
+                borderColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Gastos por categoría'
+                }
+            }
+        }
+    });
+</script>
