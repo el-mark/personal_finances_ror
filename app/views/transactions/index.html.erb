@@ -7,16 +7,16 @@
         <thead>
             <tr>
                 <th scope="col" class="d-none">ID</th>
-                <th scope="col">Día</th>
-                <th scope="col">Código</th>
-                <th scope="col">Banco</th>
-                <th scope="col">Cargo</th>
-                <th scope="col">Destino</th>
-                <th scope="col">Categoría</th>
-                <th scope="col">Recurrencia</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Moneda</th>
-                <th scope="col">Monto</th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.transaction_date") %></th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.transaction_code") %></th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.issuer") %></th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.source") %></th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.destination") %></th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.category") %></th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.frequency") %></th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.description") %></th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.currency") %></th>
+                <th scope="col"><%= t("activerecord.attributes.transaction.amount") %></th>
                 <th scope="col" style="width: 80px;">Acciones</th>
             </tr>
         </thead>

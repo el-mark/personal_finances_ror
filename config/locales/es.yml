@@ -3,6 +3,16 @@ es:
   activerecord:
     attributes:
       transaction:
+        transaction_date: Fecha
+        transaction_code: Código
+        issuer: Banco
+        source: Cargo
+        destination: Destino
+        category: Categoría
+        frequency: Recurrencia
+        description: Descripción
+        currency: Moneda
+        amount: Monto
         categories:
           other_category: "Otros"
           supermarket: "Supermercado"
