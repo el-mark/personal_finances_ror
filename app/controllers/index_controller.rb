@@ -11,12 +11,14 @@ class IndexController < ApplicationController
             currency: :usd, transaction_date: Date.current.beginning_of_month..
         ).sum(:amount) / 100.to_f
 
-        @transactions_by_category = current_user.transactions.where(
-            currency: :pen, transaction_date: Date.current.beginning_of_month..
-        ).group(:category).count
-
-        @categories = Transaction.categories.keys.map(&:to_s).map(&:titleize)
-        @category_sums = [1, 2, 3, 4, 3, 2, 0]
+        @transactions_by_category = Transaction.categories.keys.map do |category|
+            current_user.transactions.where(
+                currency: :pen, transaction_date: Date.current.beginning_of_month..
+            ).where(category: category).sum(:amount) / 100.to_f
+        end
+        @categories = Transaction.categories.keys.map(&:to_s).map do |category|
+            I18n.t("activerecord.attributes.transaction.categories.#{category}")
+        end
     end
 
     def email_new
