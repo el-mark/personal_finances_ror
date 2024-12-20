@@ -33,7 +33,7 @@
                         <%= select_tag "category", options_for_select(Transaction.categories.keys.map { |category| [t("activerecord.attributes.transaction.categories.#{category}"), category] }, selected: transaction.category), class: "form-select form-select-sm change-category", data: transaction.id %>
                     </td>
                     <td>
-                        <%= select_tag "frequency", options_for_select(Transaction.frequencies.keys.map { |frequency| [t("activerecord.attributes.transaction.frequencies.#{frequency}"), frequency] }, selected: transaction.frequency), class: "form-select form-select-sm" %>
+                        <%= select_tag "frequency", options_for_select(Transaction.frequencies.keys.map { |frequency| [t("activerecord.attributes.transaction.frequencies.#{frequency}"), frequency] }, selected: transaction.frequency), class: "form-select form-select-sm change-frequency", data: transaction.id %>
                     </td>
                     <td><%= transaction.description %></td>
                     <td class="d-none"><%= transaction.currency %></td>
