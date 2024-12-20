@@ -2,7 +2,9 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :books
-  resources :transactions
+  resources :transactions do
+    patch "api_update", on: :member
+  end
   resources :articles, except: [ :new, :edit ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
