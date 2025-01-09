@@ -7,7 +7,7 @@ es:
         transaction_code: Código
         issuer: Banco
         source: Cargo
-        destination: Destino
+        destination: Destinatario
         category: Categoría
         frequency: Recurrencia
         description: Descripción
@@ -21,7 +21,17 @@ es:
           investment: Inversión
           entertainment: Entretenimiento
           home: Hogar
+          services: Servicio
+          transport: Transporte
+          pet: Mascota
+          charity: Regalos/Donaciones
+          debts: Deudas
+          delivery: Delivery
+          subscriptions: Suscripciones
+          clothing: Ropa
+          education: Educación
+          travel: Viajes
         frequencies:
-          common: Frecuente
+          common: Regular
           rare: Extraordinario
 
