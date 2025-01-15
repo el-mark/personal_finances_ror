@@ -1,7 +1,8 @@
 # rubocop:disable Style/FrozenStringLiteralComment
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: "users/sessions",
+    registrations: "users/registrations"
   }
   resources :books
   resources :transactions do
