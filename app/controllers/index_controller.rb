@@ -3,24 +3,6 @@ class IndexController < ApplicationController
 
     def landing; end
 
-    def home
-        @total_pen = current_user.transactions.where(
-            currency: :pen, transaction_date: Date.current.beginning_of_month..
-        ).sum(:amount) / 100.to_f
-        @total_usd = current_user.transactions.where(
-            currency: :usd, transaction_date: Date.current.beginning_of_month..
-        ).sum(:amount) / 100.to_f
-
-        @transactions_by_category = Transaction.categories.keys.map do |category|
-            current_user.transactions.where(
-                currency: :pen, transaction_date: Date.current.beginning_of_month..
-            ).where(category: category).sum(:amount) / 100.to_f
-        end
-        @categories = Transaction.categories.keys.map(&:to_s).map do |category|
-            I18n.t("activerecord.attributes.transaction.categories.#{category}")
-        end
-    end
-
     def email_new
         @email = Email.new
     end

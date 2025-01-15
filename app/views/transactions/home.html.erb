@@ -19,16 +19,29 @@
 
 </div>
 
-<div>
-    <p>Total soles: <%= @total_pen %></p>
-    <p>Total dólares: <%= @total_usd %></p>
-    <p>Total: <%= @total_usd * 3.78 + @total_pen %></p>
+<div class="row">
+    <div class="col-md-6">
+        <p>Total soles: <%= @total_pen %></p>
+        <p>Total dólares: <%= @total_usd %></p>
+        <p>Total: <%= @total_usd * 3.78 + @total_pen %></p>
+        <%# <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> %>
+    </div>
+    <div class="col-md-6">
+        <div style="width: 400px;">
+            <canvas class="my-4 w-100" id="myPieChart" width="200" height="200"></canvas>
+        </div>
+    </div>
 </div>
-<%# <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> %>
 
-<div style="width: 300px;">
-    <canvas class="my-4 w-100" id="myPieChart" width="200" height="200"></canvas>
-</div>
+<h2>
+    Últimos movimientos
+    <%= link_to 'Ver todos', transactions_path, class: "btn btn-sm btn-primary" %>
+</h2>
+
+<%= render "transactions_table", transactions: @transactions %>
+
+<%= @transactions_by_category %>
+<%= @colors %>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -53,7 +66,7 @@
                     datasets: [{
                         label: 'Total Amount',
                         data: <%= @transactions_by_category %>,
-                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#E74C3C', '#4BC0C0', '#9B59B6', '#6ab740'],
+                        backgroundColor: <%= @colors.to_s.html_safe %>,
                         borderColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff'],
                         borderWidth: 1
                     }]

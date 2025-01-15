@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :transactions do
     patch "api_update", on: :member
   end
+  get "home", to: "transactions#home"
+
   resources :articles, except: [ :new, :edit ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -25,7 +27,6 @@ Rails.application.routes.draw do
   end
 
   get "landing", to: "index#landing"
-  get "home", to: "index#home"
   get "email_new", to: "index#email_new"
   post "email_new", to: "index#email_create"
   get "chatgpt_connection", to: "index#chatgpt_connection"

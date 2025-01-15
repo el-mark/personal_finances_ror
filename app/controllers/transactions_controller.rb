@@ -2,6 +2,46 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy api_update ]
   skip_before_action :verify_authenticity_token, only: [ :api_update ]
 
+  def home
+    @total_pen = current_user.transactions.where(
+        currency: :pen, transaction_date: Date.current.beginning_of_month..
+    ).sum(:amount) / 100.to_f
+    @total_usd = current_user.transactions.where(
+        currency: :usd, transaction_date: Date.current.beginning_of_month..
+    ).sum(:amount) / 100.to_f
+
+    @transactions_by_category = Transaction.categories.keys.map do |category|
+        current_user.transactions.where(
+            currency: :pen, transaction_date: Date.current.beginning_of_month..
+        ).where(category: category).sum(:amount) / 100.to_f
+    end
+    @categories = Transaction.categories.keys.map(&:to_s).map do |category|
+        I18n.t("activerecord.attributes.transaction.categories.#{category}")
+    end
+
+    @transactions = current_user.transactions.order(transaction_date: :desc, id: :desc).limit(10)
+
+    @colors = [
+      '#3b5998',
+      '#00aced',
+      '#007bb6',
+      '#e4c500',
+      '#dd4b39',
+      '#ffa500',
+      '#cb2027',
+      '#ff0084',
+      '#32506d',
+      '#8d6e63',
+      '#ea4c89',
+      '#00bf8f',
+      '#1769ff',
+      '#171516',
+      '#008000',
+      '#fffa37',
+      '#64d448'
+    ]
+  end
+
   # GET /transactions or /transactions.json
   def index
     @transactions = current_user.transactions.order(transaction_date: :desc)
