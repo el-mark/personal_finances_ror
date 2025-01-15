@@ -12,55 +12,55 @@
   <% end %>
 
   <div class="row align-items-center">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :transaction_date, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.date_field :transaction_date, value: transaction.transaction_date.blank? ? Date.current : transaction.transaction_date, class: "form-control" %>
     </div>
   </div>
 
   <div class="row align-items-center mt-1">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :transaction_code, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.text_field :transaction_code, class: "form-control" %>
     </div>
   </div>
 
   <div class="row align-items-center mt-1">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :issuer, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.text_field :issuer, class: "form-control" %>
     </div>
   </div>
 
   <div class="row align-items-center mt-1">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :source, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.text_area :source, class: "form-control" %>
     </div>
   </div>
 
   <div class="row align-items-center mt-1">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :destination, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.text_area :destination, class: "form-control" %>
     </div>
   </div>
 
   <div class="row align-items-center mt-1">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :category, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.select :category, 
           Transaction.categories.keys.map { |category| [t("activerecord.attributes.transaction.categories.#{category}"), category] },
           {}, 
@@ -70,10 +70,10 @@
   </div>
 
   <div class="row align-items-center mt-1">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :frequency, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.select :frequency, 
           Transaction.frequencies.keys.map { |frequency| [t("activerecord.attributes.transaction.frequencies.#{frequency}"), frequency] },
           {}, 
@@ -83,28 +83,28 @@
   </div>
 
   <div class="row align-items-center mt-1">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :description, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.text_area :description, class: "form-control" %>
     </div>
   </div>
 
   <div class="row align-items-center mt-1">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :currency, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.select :currency, Transaction.currencies.keys.map(&:to_sym), {}, { class: "form-select" } %>
     </div>
   </div>
 
   <div class="row align-items-center mt-1 mb-3">
-    <div class="col-auto">
+    <div class="col-md-4">
       <%= form.label :amount, style: "display: block", class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-md-8">
       <%= form.number_field :amount, class: "form-control" %>
     </div>
   </div>
