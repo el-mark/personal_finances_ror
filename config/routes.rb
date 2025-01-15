@@ -19,8 +19,10 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "index#landing"
-  # root "devise/sessions#new"
+  devise_scope :user do
+    root "users/sessions#new"
+  end
+
   get "landing", to: "index#landing"
   get "home", to: "index#home"
   get "email_new", to: "index#email_new"
