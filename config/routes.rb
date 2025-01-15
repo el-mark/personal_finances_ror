@@ -1,6 +1,8 @@
 # rubocop:disable Style/FrozenStringLiteralComment
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   resources :books
   resources :transactions do
     patch "api_update", on: :member
