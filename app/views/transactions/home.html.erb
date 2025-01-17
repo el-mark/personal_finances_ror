@@ -16,15 +16,33 @@
             This week
         </button>
     </div>
-
 </div>
 
 <div class="row">
     <div class="col-md-6">
-        <p>Total soles: <%= @total_pen %></p>
-        <p>Total dólares: <%= @total_usd %></p>
-        <p>Total: <%= @total_usd * 3.78 + @total_pen %></p>
-        <%# <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> %>
+        <p class="d-none">Total soles: <%= @total_pen %></p>
+        <p class="d-none">Total dólares: <%= @total_usd %></p>
+        <p class="d-none">Total: <%= @total_usd * 3.78 + @total_pen %></p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col"></th>
+                <th scope="col">Frecuentes</th>
+                <th scope="col">Extraordinarios</th>
+                <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Gastos</th>
+                    <td><%= @common_sum %></td>
+                    <td><%= @rare_sum %></td>
+                    <td><%= @common_sum + @rare_sum %></td>
+                </tr>
+            </tbody>
+        </table>
+        
     </div>
     <div class="col-md-6">
         <div style="width: 400px;">
@@ -46,7 +64,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-
     document.addEventListener('turbo:load', () => {
         // Code to initialize your chart goes here
         // console.log('Turbo load event triggered');

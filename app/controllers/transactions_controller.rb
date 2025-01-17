@@ -19,6 +19,9 @@ class TransactionsController < ApplicationController
         I18n.t("activerecord.attributes.transaction.categories.#{category}")
     end
 
+    @common_sum = common_sum
+    @rare_sum = rare_sum
+
     @transactions = current_user.transactions.order(transaction_date: :desc, id: :desc).limit(10)
 
     @colors = [
@@ -120,4 +123,27 @@ class TransactionsController < ApplicationController
     def unprotected_transaction_params
       params.require(:transaction).permit(:category, :frequency)
     end
+
+    def common_sum
+      total_pen = current_user.transactions.where(
+        currency: :pen, frequency: :common, transaction_date: Date.current.beginning_of_month..
+      ).sum(:amount) / 100.to_f
+      total_usd = current_user.transactions.where(
+        currency: :usd, frequency: :common, transaction_date: Date.current.beginning_of_month..
+      ).sum(:amount) / 100.to_f
+
+      total_usd * 3.78 + total_pen
+    end
+
+    def rare_sum
+      total_pen = current_user.transactions.where(
+        currency: :pen, frequency: :rare, transaction_date: Date.current.beginning_of_month..
+      ).sum(:amount) / 100.to_f
+      total_usd = current_user.transactions.where(
+        currency: :usd, frequency: :rare, transaction_date: Date.current.beginning_of_month..
+      ).sum(:amount) / 100.to_f
+
+      total_usd * 3.78 + total_pen
+    end
+    
 end
