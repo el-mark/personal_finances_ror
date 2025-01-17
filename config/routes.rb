@@ -1,16 +1,5 @@
 # rubocop:disable Style/FrozenStringLiteralComment
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    sessions: "users/sessions",
-    registrations: "users/registrations"
-  }
-  resources :books
-  resources :transactions do
-    patch "api_update", on: :member
-  end
-  get "home", to: "transactions#home"
-
-  resources :articles, except: [ :new, :edit ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -21,11 +10,13 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # Defines the root path route ("/")
-  devise_scope :user do
-    root "users/sessions#new"
-  end
+  resources :articles, except: [ :new, :edit ]
 
+  resources :books
+
+  resources :categories, only: [ :index ]
+
+  # index
   get "landing", to: "index#landing"
   get "email_new", to: "index#email_new"
   post "email_new", to: "index#email_create"
@@ -34,6 +25,20 @@ Rails.application.routes.draw do
   namespace :mailgun, constraints: { format: "json" } do
     post "forward_email", to: "forward_email"
   end
-end
 
+  resources :transactions do
+    patch "api_update", on: :member
+  end
+  get "home", to: "transactions#home"
+
+  # Defines the root path route ("/")
+  devise_scope :user do
+    root "users/sessions#new"
+  end
+
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    registrations: "users/registrations"
+  }
+end
 # rubocop:enable Style/FrozenStringLiteralComment
