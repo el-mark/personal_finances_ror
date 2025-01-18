@@ -36,9 +36,9 @@
             <tbody>
                 <tr>
                     <th scope="row">Gastos</th>
-                    <td><%= @common_sum %></td>
-                    <td><%= @rare_sum %></td>
-                    <td><%= @common_sum + @rare_sum %></td>
+                    <td><%= @common_sum.round(2) %></td>
+                    <td><%= @rare_sum.round(2) %></td>
+                    <td><%= (@common_sum + @rare_sum).round(2) %></td>
                 </tr>
             </tbody>
         </table>
