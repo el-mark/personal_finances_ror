@@ -1,1 +1,19 @@
-hola
+
+<% @categories.each do |category| %>
+    <div class="row">
+        <div class="col-md-6">
+            <%= form_for(category, local: true) do |form| %>
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                    <span><%= t("activerecord.attributes.transaction.categories.#{category.name}") %></span>
+                    </div>
+                    <div class="col-md-8">
+                    <%= form.text_field :budget %>
+                        <%= form.submit "Guardar", class: "btn btn-success btn-sm" %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+<% end %>
+

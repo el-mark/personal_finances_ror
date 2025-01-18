@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :books
 
-  resources :categories, only: [ :index ]
+  resources :categories, only: [ :index, :update ]
 
   # index
   get "landing", to: "index#landing"
