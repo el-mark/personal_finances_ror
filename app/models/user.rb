@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :transactions
   has_many :user_emails
+  has_many :categories
 
   after_create :create_user_email
 
