@@ -73,4 +73,5 @@ end
 gem 'pg'
 gem "ruby-openai"
 gem 'devise'
+gem 'omniauth-google-oauth2'
 gem 'rails-i18n'

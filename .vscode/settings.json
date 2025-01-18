@@ -3,6 +3,8 @@
         "activerecord",
         "mailgun",
         "movimientos",
-        "thead"
+        "omniauth",
+        "thead",
+        "userinfo"
     ]
 }
