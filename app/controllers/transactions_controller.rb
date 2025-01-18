@@ -3,6 +3,8 @@ class TransactionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [ :api_update ]
 
   def home
+    @user_categories = current_user.categories
+
     @total_pen = current_user.transactions.where(
         currency: :pen, transaction_date: Date.current.beginning_of_month..
     ).sum(:amount) / 100.to_f
