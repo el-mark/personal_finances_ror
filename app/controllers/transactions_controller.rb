@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy api_update ]
   skip_before_action :verify_authenticity_token, only: [ :api_update ]
 
-  def home
+  def dashboard
     @user_categories = current_user.categories
 
     @total_pen = current_user.transactions.where(

@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :transactions do
     patch "api_update", on: :member
   end
-  get "home", to: "transactions#home"
+  get "dashboard", to: "transactions#dashboard"
 
   # Defines the root path route ("/")
   devise_scope :user do
