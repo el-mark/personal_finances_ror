@@ -145,5 +145,4 @@ class TransactionsController < ApplicationController
 
       total_usd * 3.78 + total_pen
     end
-    
 end
