@@ -8,3 +8,18 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/* Personal Finances */
+.pf-card {
+    border-radius: 30px;
+    background-color: white;
+    padding: 15px 20px;
+    .title{
+        font-size: 17px;
+    }
+}
+
+main {
+    color: #494955;
+}
+

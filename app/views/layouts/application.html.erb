@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%# stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'bootstrap.min' %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
     <%= yield :head %>
@@ -136,7 +136,7 @@
         </symbol>
     </svg>
 
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle d-none">
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
             aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
             <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
@@ -249,27 +249,18 @@
         </symbol>
     </svg>
 
-    <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white text-center" href="#" style="padding-top: 10px; padding-bottom: 10px;">
+    <header class="navbar sticky-top flex-md-nowrap p-0" data-bs-theme="dark">
+        <a class="col-md-3 col-lg-2 me-0 px-3 fs-6 text-white text-center" href="#" style="padding-top: 10px; padding-bottom: 10px;">
             <%# Finanzas Personales %>
             <%= image_tag 'finances_logo_white.png', alt: '', width: 30, height: 30 %>
         </a>
 
         <ul class="navbar-nav flex-row d-md-none">
             <li class="nav-item text-nowrap">
-                <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false"
-                    aria-label="Toggle search">
-                    <svg class="bi">
-                        <use xlink:href="#search" />
-                    </svg>
-                </button>
-            </li>
-            <li class="nav-item text-nowrap">
                 <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <svg class="bi">
+                    <svg class="bi" style="fill: black;">
                         <use xlink:href="#list" />
                     </svg>
                 </button>
@@ -283,8 +274,8 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-                <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
+            <div class="sidebar col-md-3 col-lg-2 p-0">
+                <div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebarMenu"
                     aria-labelledby="sidebarMenuLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="sidebarMenuLabel">
@@ -381,7 +372,7 @@
                 </div>
             </div>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="background-color: #F8F8F8;">
             
                 <% if notice %>
                     <div class="alert alert-success mt-1" role="alert">
