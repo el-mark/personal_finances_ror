@@ -26,10 +26,10 @@
                     <td class="d-none"><%= transaction.source %></td>
                     <td><%= transaction.destination %></td>
                     <td>
-                        <%= select_tag "category", options_for_select(Transaction.categories.keys.sort_by { |category| t("activerecord.attributes.transaction.categories.#{category}") }.map { |category| [t("activerecord.attributes.transaction.categories.#{category}"), category] }, selected: transaction.category), class: "form-select form-select-sm change-category", data: transaction.id %>
+                        <%= select_tag "category_#{transaction.id}", options_for_select(Transaction.categories.keys.sort_by { |category| t("activerecord.attributes.transaction.categories.#{category}") }.map { |category| [t("activerecord.attributes.transaction.categories.#{category}"), category] }, selected: transaction.category), class: "form-select form-select-sm change-category", data: transaction.id %>
                     </td>
                     <td>
-                        <%= select_tag "frequency", options_for_select(Transaction.frequencies.keys.map { |frequency| [t("activerecord.attributes.transaction.frequencies.#{frequency}"), frequency] }, selected: transaction.frequency), class: "form-select form-select-sm change-frequency", data: transaction.id %>
+                        <%= select_tag "frequency_#{transaction.id}", options_for_select(Transaction.frequencies.keys.map { |frequency| [t("activerecord.attributes.transaction.frequencies.#{frequency}"), frequency] }, selected: transaction.frequency), class: "form-select form-select-sm change-frequency", data: transaction.id %>
                     </td>
                     <td><%= transaction.description %></td>
                     <td class="d-none"><%= transaction.currency %></td>
