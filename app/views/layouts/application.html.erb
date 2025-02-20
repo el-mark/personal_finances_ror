@@ -249,11 +249,17 @@
         </symbol>
     </svg>
 
-    <header class="navbar sticky-top flex-md-nowrap p-0" data-bs-theme="dark">
+    <header class="navbar sticky-top flex-md-nowrap p-0" data-bs-theme="dark" style="background-color: white;">
         <span class="col-md-3 col-lg-2 me-0 px-3 fs-6 text-center" style="padding-top: 10px; padding-bottom: 10px; font-weight: bold;color: #494955;">
             <%# Finanzas Personales %>
             <%# image_tag 'finances_logo_white.png', alt: '', width: 30, height: 30 %>
-            <%= current_user.email %>
+            
+            <% if current_user.name.present? %>
+                <%= current_user.full_name %>
+            <% else %>
+                <%= current_user.email %>
+            <% end %>
+            
         </span>
 
         <ul class="navbar-nav flex-row d-md-none">
@@ -280,7 +286,7 @@
                     aria-labelledby="sidebarMenuLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="sidebarMenuLabel">
-                            Finanzas Personales
+                            <%# Finanzas Personales %>
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                             data-bs-target="#sidebarMenu" aria-label="Close"></button>

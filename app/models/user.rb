@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   after_create :create_user_email
 
+  def full_name
+    "#{self.name} #{self.last_name}".titleize
+  end
+
   private
 
   def create_user_email
