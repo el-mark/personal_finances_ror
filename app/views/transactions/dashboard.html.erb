@@ -1,88 +1,101 @@
-<div class="row mt-4">
-    <div class="col-md-6">
-        <div class="pf-card">
-            <h2 class="title">
-                Gastos principales del mes
-            </h2 class="title">
+<div style="max-width: 900px; margin: auto;">
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="pf-card">
+                <h2 class="title">
+                    Gastos principales del mes
+                </h2 class="title">
 
-            <div style="width: auto; height: 315px;">
-                <div id="main" style="width: 500px; height: 450px; transform: translate(-29px, -67px);"></div>
+                <div style="width: auto; height: 291px;">
+                    <div id="spending_chart" style="width: 450px; height: 400px; transform: translate(-18px, -47px);"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="pf-card" style="position: relative;">
+                <h2 class="title">
+                    ¿Qué % de tu presupuesto has gastado?
+                </h2 class="title">
+
+                <span style="position: absolute; font-size: 75px;">75%</span>
+
+                <span style="position: absolute; width: 204px; font-size: 12px; bottom: 28px; background: #ffff002e; padding: 10px 14px; border-radius: 18px; z-index: 1; color: #00000091;">
+                    * Si gastas más de S/.500 este mes empezarás a consumir tu meta de ahorros
+                </span>
+
+                <div style="width: auto; height: 291px;">
+                    <div id="budget_chart" style="width: 450px; height: 400px; transform: translate(41px, -47px);"></div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="pf-card">
-            <h2 class="title">
-                ¿Qué % de tu presupuesto has gastado?
-            </h2 class="title">
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="d-none">Total soles: <%= @total_pen %></p>
+            <p class="d-none">Total dólares: <%= @total_usd %></p>
+            <p class="d-none">Total: <%= @total_usd * 3.78 + @total_pen %></p>
+
+            <table class="table d-none">
+                <thead>
+                    <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Frecuentes</th>
+                    <th scope="col">Extraordinarios</th>
+                    <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Gastos</th>
+                        <td><%= @common_sum.round(2) %></td>
+                        <td><%= @rare_sum.round(2) %></td>
+                        <td><%= (@common_sum + @rare_sum).round(2) %></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table d-none">
+                <thead>
+                    <tr>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Presupuesto</th>
+                    <th scope="col">Gasto</th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @user_categories.each do |category| %>
+                        <% spending = TransactionsByCategory.new(current_user, category).call %>
+                        <tr>
+                            <th scope="row"><%= t("activerecord.attributes.transaction.categories.#{category.name}") %></th>
+                            <td><%= category.budget %></td>
+                            <td><%= spending %></td>
+                            <td style="color: <%= (category.budget - spending).positive? ? 'green' : 'red' %>;">
+                                <%= (category.budget - spending).round(2) %>
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            
         </div>
     </div>
-</div>
-<br>
-<div class="row">
-    <div class="col-md-6">
-        <p class="d-none">Total soles: <%= @total_pen %></p>
-        <p class="d-none">Total dólares: <%= @total_usd %></p>
-        <p class="d-none">Total: <%= @total_usd * 3.78 + @total_pen %></p>
 
-        <table class="table">
-            <thead>
-                <tr>
-                <th scope="col"></th>
-                <th scope="col">Frecuentes</th>
-                <th scope="col">Extraordinarios</th>
-                <th scope="col">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">Gastos</th>
-                    <td><%= @common_sum.round(2) %></td>
-                    <td><%= @rare_sum.round(2) %></td>
-                    <td><%= (@common_sum + @rare_sum).round(2) %></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="pf-card">
+        <h2 class="title">
+            Transacciones Recientes <i class="bi bi-chevron-right"></i>
+        </h2 class="title">
 
-        <table class="table">
-            <thead>
-                <tr>
-                <th scope="col">Categoría</th>
-                <th scope="col">Presupuesto</th>
-                <th scope="col">Gasto</th>
-                <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @user_categories.each do |category| %>
-                    <% spending = TransactionsByCategory.new(current_user, category).call %>
-                    <tr>
-                        <th scope="row"><%= t("activerecord.attributes.transaction.categories.#{category.name}") %></th>
-                        <td><%= category.budget %></td>
-                        <td><%= spending %></td>
-                        <td style="color: <%= (category.budget - spending).positive? ? 'green' : 'red' %>;">
-                            <%= (category.budget - spending).round(2) %>
-                        </td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-        
+        <%= render "transactions_table", transactions: @transactions %>
     </div>
 </div>
-
-<h2>
-    Últimos movimientos
-    <%= link_to 'Ver todos', transactions_path, class: "btn btn-sm btn-primary" %>
-</h2>
-
-<%= render "transactions_table", transactions: @transactions %>
 
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
 
 <script type="text/javascript">
     // Initialize the echarts instance based on the prepared dom
-    var myChart = echarts.init(document.getElementById('main'));
+    var myChart = echarts.init(document.getElementById('spending_chart'));
 
     // Specify the configuration items and data for the chart
     var option = {
@@ -93,7 +106,7 @@
         legend: null,
         series: [
             {
-                name: 'Monto gastado',
+                name: 'Monto gastado (S/.)',
                 type: 'pie',
                 radius: '50%',
                 data: <%= @transactions_by_category.to_json.html_safe %>,
@@ -112,44 +125,42 @@
       myChart.setOption(option);
 </script>
 
-<script>
-    document.addEventListener('turbo:load', () => {
-        // Code to initialize your chart goes here
-        // console.log('Turbo load event triggered');
-        renderChart();
-    });
 
+<script type="text/javascript">
+    // Initialize the echarts instance based on the prepared dom
+    var myChart = echarts.init(document.getElementById('budget_chart'));
 
-    function renderChart() {
-        // Pie chart example
-        if (document.getElementById('myPieChart')) {
-            const ctx = document.getElementById('myPieChart').getContext('2d');
-
-            myPieChart = new Chart(ctx, {
+    // Specify the configuration items and data for the chart
+    var option = {
+        title: null,
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: null,
+        labelLine: {
+            show: false
+        },
+        series: [
+            {
+                name: 'Soles',
                 type: 'pie',
-                data: {
-                    labels: <%= @categories.to_s.html_safe %>,
-                    datasets: [{
-                        label: 'Total Amount',
-                        data: <%= @transactions_by_category %>,
-                        backgroundColor: <%= @colors.to_s.html_safe %>,
-                        borderColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff'],
-                        borderWidth: 1
-                    }]
+                label: {
+                    show: false,
+                    position: 'center'
                 },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Gastos por categoría'
-                        }
+                radius: '50%',
+                data: [{ "value": 2000, "name": "Gastado" }, { "value": 100, "name": "Restante" }],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
                     }
                 }
-            });
-        }
-    }
+            }
+        ]
+    };
+
+      // Display the chart using the configuration items and data just specified.
+      myChart.setOption(option);
 </script>

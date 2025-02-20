@@ -23,37 +23,16 @@ class TransactionsController < ApplicationController
         value: sum_mount,
         name: I18n.t("activerecord.attributes.transaction.categories.#{category}")
       }
-    end.compact
+    end.compact.sort_by { |transaction| -transaction[:value] }
+
     @categories = Transaction.categories.keys.map(&:to_s).map do |category|
         I18n.t("activerecord.attributes.transaction.categories.#{category}")
     end
-
-    # { value: 1048, name: 'Search Engine' }
 
     @common_sum = common_sum
     @rare_sum = rare_sum
 
     @transactions = current_user.transactions.order(transaction_date: :desc, id: :desc).limit(10)
-
-    @colors = [
-      '#3b5998',
-      '#00aced',
-      '#007bb6',
-      '#e4c500',
-      '#dd4b39',
-      '#ffa500',
-      '#cb2027',
-      '#ff0084',
-      '#32506d',
-      '#8d6e63',
-      '#ea4c89',
-      '#00bf8f',
-      '#1769ff',
-      '#171516',
-      '#008000',
-      '#fffa37',
-      '#64d448'
-    ]
   end
 
   # GET /transactions or /transactions.json
