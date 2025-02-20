@@ -34,4 +34,8 @@ es:
         frequencies:
           common: Regular
           rare: Extraordinario
-
+      user:
+        name: Nombre
+        last_name: Apellido
+        password: Contraseña
+        password_confirmation: Confirmación de Contraseña

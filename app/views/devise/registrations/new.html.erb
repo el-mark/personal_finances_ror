@@ -1,4 +1,4 @@
-<h2 class="h3 mb-3 fw-normal">Sign up</h2>
+<h2 class="h3 mb-3 fw-normal">Registrarme</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -9,27 +9,30 @@
   </div>
 
   <div class="form-floating">
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", placeholder: "Nombre", style: "margin-bottom: -1px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-top-right-radius: 0;" %>
+    <%= f.label :name %>
+  </div>
+
+  <div class="form-floating">
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "form-control", placeholder: "Apellido", style: "margin-bottom: -1px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-top-right-radius: 0;" %>
+    <%= f.label :last_name %>
+  </div>
+
+  <div class="form-floating">
     <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "NewPassword", style: "margin-bottom: -1px; border-bottom-left-radius: 0; border-bottom-right-radius: 0;" %>
     <%= f.label :password %>
   </div>
-
-
-<%# style="
-    margin-bottom: -1px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-" %>
 
   <div class="form-floating">
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "NewPassword" %>
     <%= f.label :password_confirmation %>
   </div>
   <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(Mínimo <%= @minimum_password_length %> caracteres)</em>
   <% end %>
 
   <div class="actions mt-3 mb-1">
-    <%= f.submit "Sign up", class: "btn btn-primary w-100 py-2 mb-2" %>
+    <%= f.submit "Registrarme", class: "btn btn-primary w-100 py-2 mb-2" %>
   </div>
 <% end %>
 

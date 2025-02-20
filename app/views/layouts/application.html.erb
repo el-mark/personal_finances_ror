@@ -250,7 +250,7 @@
     </svg>
 
     <header class="navbar sticky-top flex-md-nowrap p-0" data-bs-theme="dark" style="background-color: white;">
-        <span class="col-md-3 col-lg-2 me-0 px-3 fs-6 text-center" style="padding-top: 10px; padding-bottom: 10px; font-weight: bold;color: #494955;">
+        <span class="col-md-3 col-lg-2 me-0 px-3 fs-6 text-center" style="padding-top: 10px; padding-bottom: 10px; font-weight: bold;color: black;">
             <%# Finanzas Personales %>
             <%# image_tag 'finances_logo_white.png', alt: '', width: 30, height: 30 %>
             
@@ -301,7 +301,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
                                         href="<%= dashboard_path %>">
-                                        <div style="transform: translate(0px, -2px);">
+                                        <div style="transform: translate(0px, -2px); width: 22px;">
                                             <%= image_tag 'house-icon.png', alt: '', width: 21, height: 18 %>
                                         </div>
                                         Dashboard
@@ -319,7 +319,7 @@
                                 <li class="nav-item"></li>
                                     <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
                                         href="<%= categories_path %>">
-                                        <div style="transform: translate(0px, -2px);">
+                                        <div style="transform: translate(0px, -2px); width: 22px;">
                                             <%= image_tag 'blocks-icon.png', alt: '', width: 19, height: 19 %>
                                         </div>
                                         Planificación
@@ -367,9 +367,7 @@
                             <ul class="nav flex-column mb-auto">
                                 <li class="nav-item">
                                     <%= button_to destroy_user_session_path, method: :delete, class: "nav-link d-flex align-items-center gap-2" do %>
-                                        <svg class="bi">
-                                            <use xlink:href="#door-closed" />
-                                        </svg>
+                                        <i class="bi bi-box-arrow-right" style="transform: translate(0px, -5px); width: 22px;"></i>
                                         Salir
                                     <% end %>
                                 </li>
