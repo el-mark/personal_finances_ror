@@ -14,7 +14,7 @@
             <th scope="col"><%= t("activerecord.attributes.transaction.description") %></th>
             <th scope="col" class="d-none"><%= t("activerecord.attributes.transaction.currency") %></th>
             <th scope="col"><%= t("activerecord.attributes.transaction.amount") %></th>
-            <th scope="col" style="width: 80px;" class="d-none">Acciones</th>
+            <th scope="col" style="width: 80px;">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +35,7 @@
                 <td><%= transaction.description %></td>
                 <td class="d-none"><%= transaction.currency %></td>
                 <td><%= transaction.currency == 'usd' ? '$ ' : 'S/. ' %><%= transaction.amount / 100.to_f %></td>
-                <td class="d-none">
+                <td>
                     <div style="display: flex; justify-content: space-between;">
                         <a href="<%= edit_transaction_path(transaction) %>" class="btn btn-outline-success btn-sm">
                             <i class="bi bi-pencil-fill"></i>
