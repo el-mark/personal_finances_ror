@@ -14,8 +14,16 @@
     border-radius: 33px;
     background-color: white;
     padding: 18px 27px;
+    font-size: 13px;
     .title{
         font-size: 17px;
+    }
+}
+
+.pf-table {
+    th {
+        font-weight: normal;
+        font-size: 12px;
     }
 }
 
