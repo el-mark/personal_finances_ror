@@ -5,7 +5,9 @@
                 Gastos principales del mes
             </h2 class="title">
 
-            <div id="main" style="width: 450px; height: 350px;"></div>
+            <div style="width: auto; height: 315px;">
+                <div id="main" style="width: 500px; height: 450px; transform: translate(-29px, -67px);"></div>
+            </div>
         </div>
     </div>
     <div class="col-md-6">
@@ -73,8 +75,6 @@
     Últimos movimientos
     <%= link_to 'Ver todos', transactions_path, class: "btn btn-sm btn-primary" %>
 </h2>
-
-<p><%= @transactions_by_category.to_json.html_safe %></p>
 
 <%= render "transactions_table", transactions: @transactions %>
 
