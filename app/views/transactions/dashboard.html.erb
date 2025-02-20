@@ -4,6 +4,8 @@
             <h2 class="title">
                 Gastos principales del mes
             </h2 class="title">
+
+            <div id="main" style="width: 450px; height: 350px;"></div>
         </div>
     </div>
     <div class="col-md-6">
@@ -14,7 +16,7 @@
         </div>
     </div>
 </div>
-
+<br>
 <div class="row">
     <div class="col-md-6">
         <p class="d-none">Total soles: <%= @total_pen %></p>
@@ -65,15 +67,14 @@
         </table>
         
     </div>
-    <div class="col-md-6">
-            <div id="main" style="width: 600px;height:400px;"></div>
-    </div>
 </div>
 
 <h2>
     Últimos movimientos
     <%= link_to 'Ver todos', transactions_path, class: "btn btn-sm btn-primary" %>
 </h2>
+
+<p><%= @transactions_by_category.to_json.html_safe %></p>
 
 <%= render "transactions_table", transactions: @transactions %>
 
@@ -85,35 +86,22 @@
 
     // Specify the configuration items and data for the chart
     var option = {
-        title: {
-            text: 'Referer of a Website',
-            subtext: 'Fake Data',
-            left: 'center'
-        },
+        title: null,
         tooltip: {
             trigger: 'item'
         },
-        legend: {
-            orient: 'vertical',
-            left: 'left'
-        },
+        legend: null,
         series: [
             {
-                name: 'Access From',
+                name: 'Monto gastado',
                 type: 'pie',
                 radius: '50%',
-                data: [
-                    { value: 1048, name: 'Search Engine' },
-                    { value: 735, name: 'Direct' },
-                    { value: 580, name: 'Email' },
-                    { value: 484, name: 'Union Ads' },
-                    { value: 300, name: 'Video Ads' }
-                ],
+                data: <%= @transactions_by_category.to_json.html_safe %>,
                 emphasis: {
                     itemStyle: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
                     }
                 }
             }
