@@ -102,53 +102,54 @@ class TransactionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def transaction_params
-      params.require(:transaction).permit(
-        :amount, :transaction_date, :transaction_code, :issuer, :source,
-        :destination, :category, :frequency, :description, :currency
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    @transaction = Transaction.find(params.expect(:id))
+  end
 
-    def unprotected_transaction_params
-      params.require(:transaction).permit(:category, :frequency)
-    end
+  # Only allow a list of trusted parameters through.
+  def transaction_params
+    params.require(:transaction).permit(
+      :amount, :transaction_date, :transaction_code, :issuer, :source,
+      :destination, :category, :frequency, :description, :currency
+    )
+  end
 
-    def spending
-      total_pen = current_user.transactions.where(
-        currency: :pen, transaction_date: Date.current.beginning_of_month..
-      ).sum(:amount) / 100.to_f
-      total_usd = current_user.transactions.where(
-        currency: :usd, transaction_date: Date.current.beginning_of_month..
-      ).sum(:amount) / 100.to_f
+  def unprotected_transaction_params
+    params.require(:transaction).permit(:category, :frequency)
+  end
 
-      total_usd * 3.78 + total_pen
-    end
+  def spending
+    total_pen = current_user.transactions.where(
+      currency: :pen, transaction_date: Date.current.beginning_of_month..
+    ).sum(:amount) / 100.to_f
+    total_usd = current_user.transactions.where(
+      currency: :usd, transaction_date: Date.current.beginning_of_month..
+    ).sum(:amount) / 100.to_f
 
-    def common_sum
-      total_pen = current_user.transactions.where(
-        currency: :pen, frequency: :common, transaction_date: Date.current.beginning_of_month..
-      ).sum(:amount) / 100.to_f
-      total_usd = current_user.transactions.where(
-        currency: :usd, frequency: :common, transaction_date: Date.current.beginning_of_month..
-      ).sum(:amount) / 100.to_f
+    total_usd * 3.78 + total_pen
+  end
 
-      total_usd * 3.78 + total_pen
-    end
+  def common_sum
+    total_pen = current_user.transactions.where(
+      currency: :pen, frequency: :common, transaction_date: Date.current.beginning_of_month..
+    ).sum(:amount) / 100.to_f
+    total_usd = current_user.transactions.where(
+      currency: :usd, frequency: :common, transaction_date: Date.current.beginning_of_month..
+    ).sum(:amount) / 100.to_f
 
-    def rare_sum
-      total_pen = current_user.transactions.where(
-        currency: :pen, frequency: :rare, transaction_date: Date.current.beginning_of_month..
-      ).sum(:amount) / 100.to_f
-      total_usd = current_user.transactions.where(
-        currency: :usd, frequency: :rare, transaction_date: Date.current.beginning_of_month..
-      ).sum(:amount) / 100.to_f
+    total_usd * 3.78 + total_pen
+  end
 
-      total_usd * 3.78 + total_pen
-    end
+  def rare_sum
+    total_pen = current_user.transactions.where(
+      currency: :pen, frequency: :rare, transaction_date: Date.current.beginning_of_month..
+    ).sum(:amount) / 100.to_f
+    total_usd = current_user.transactions.where(
+      currency: :usd, frequency: :rare, transaction_date: Date.current.beginning_of_month..
+    ).sum(:amount) / 100.to_f
+
+    total_usd * 3.78 + total_pen
+  end
 end

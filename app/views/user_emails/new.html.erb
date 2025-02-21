@@ -37,14 +37,21 @@
             Correos registrados con éxito
         </h2 class="title">
 
-        <div style="display: flex; margin-bottom: 10px;">
-            <div style="font-size: 16px; color: #9f9f9f; width: 303px;">arturogonzalez@gmail.com</div>
-            <div style="font-size: 16px; background-color: #F6F6F6; border-radius: 18px; padding: 0; width: 162px; text-align: center;">
-                <i class="bi bi-check-circle-fill" style="color: #39B54A; margin-right: 13px; font-size: 19px;"></i>Activo
+        <% current_user.user_emails.each do |user_email| %>
+            <div style="display: flex; margin-bottom: 10px;">
+                <div style="font-size: 16px; color: #9f9f9f; width: 303px;"><%= user_email.address %></div>
+                <div style="font-size: 16px; background-color: #F6F6F6; border-radius: 18px; padding: 0; width: 162px; text-align: center;">
+                    <i class="bi bi-check-circle-fill" style="color: #39B54A; margin-right: 13px; font-size: 19px;"></i>Activo
+                </div>
+                <div>
+                    <%= button_to user_email, method: :delete, class: "btn btn-link", style: "margin-left: 25px; padding: 0;", data: { turbo_confirm: 'deseas borrar?' } do %>
+                        <i class="bi bi-trash3" style="font-size: 21px; transform: translate(0px, -2px); color: black;"></i>
+                    <% end %>
+                </div>
             </div>
-            <div><i class="bi bi-trash3" style="font-size: 21px; margin-left: 25px; transform: translate(0px, -2px);"></i></div>
-        </div>
-        <div style="display: flex; margin-bottom: 10px;">
+        <% end %>
+
+        <div style="display: flex; margin-bottom: 10px;" class="d-none">
             <div style="font-size: 16px; color: #9f9f9f; width: 303px;">arturogonzalez@gmail.com</div>
             <div style="font-size: 16px; background-color: #F6F6F6; border-radius: 18px; padding: 0; width: 162px; text-align: center;">
                 <i class="bi bi-x-circle-fill" style="color: #FF3B3A; margin-right: 13px; font-size: 19px;"></i>Desconectado
