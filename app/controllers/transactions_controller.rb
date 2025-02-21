@@ -29,6 +29,11 @@ class TransactionsController < ApplicationController
         I18n.t("activerecord.attributes.transaction.categories.#{category}")
     end
 
+    @budget = current_user.categories.sum(:budget).round
+    @spending = spending.round
+    @difference = [ @budget - @spending, 0 ].max
+    @budget_percentage = ((1 - (@difference / @budget.to_f)) * 100).round
+
     @common_sum = common_sum
     @rare_sum = rare_sum
 
@@ -112,6 +117,17 @@ class TransactionsController < ApplicationController
 
     def unprotected_transaction_params
       params.require(:transaction).permit(:category, :frequency)
+    end
+
+    def spending
+      total_pen = current_user.transactions.where(
+        currency: :pen, transaction_date: Date.current.beginning_of_month..
+      ).sum(:amount) / 100.to_f
+      total_usd = current_user.transactions.where(
+        currency: :usd, transaction_date: Date.current.beginning_of_month..
+      ).sum(:amount) / 100.to_f
+
+      total_usd * 3.78 + total_pen
     end
 
     def common_sum

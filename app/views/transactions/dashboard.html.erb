@@ -17,11 +17,21 @@
                     ¿Qué % de tu presupuesto has gastado?
                 </h2 class="title">
 
-                <span style="position: absolute; font-size: 75px;">75%</span>
-
-                <span style="position: absolute; width: 204px; font-size: 12px; bottom: 28px; background: #ffff002e; padding: 10px 14px; border-radius: 18px; z-index: 1; color: #00000091;">
-                    * Si gastas más de S/.500 este mes empezarás a consumir tu meta de ahorros
+                <span style="position: absolute; font-size: 75px;">
+                    <%= @budget_percentage %>%
                 </span>
+
+                
+                <% if @difference.positive? %>
+                    <span style="position: absolute; width: 204px; font-size: 12px; bottom: 28px; background: #ffff002e; padding: 10px 14px; border-radius: 18px; z-index: 1; color: #00000091;">
+                        * Si gastas más de S/.<%= number_to_currency(@difference, precision: 0, unit: '') %> este mes empezarás a consumir tu meta de ahorros
+                    </span>
+                <% else %>
+                    <span style="position: absolute; width: 204px; font-size: 12px; bottom: 28px; background: #ffff002e; padding: 10px 14px; border-radius: 18px; z-index: 1; color: #00000091;">
+                        * Sobrepasaste tu presupuesto, estas consumiendo de ahorros
+                    </span>
+                <% end %>
+                
 
                 <div style="width: auto; height: 291px;">
                     <div id="budget_chart" style="width: 450px; height: 400px; transform: translate(41px, -47px);"></div>
@@ -149,7 +159,7 @@
                     position: 'center'
                 },
                 radius: '50%',
-                data: [{ "value": 2000, "name": "Gastado" }, { "value": 100, "name": "Restante" }],
+                data: [{ "value": <%= @budget - @difference %>, "name": "Gastado" }, { "value": <%= @difference %>, "name": "Restante" }],
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
