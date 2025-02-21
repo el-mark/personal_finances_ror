@@ -39,3 +39,5 @@ es:
         last_name: Apellido
         password: Contraseña
         password_confirmation: Confirmación de Contraseña
+      user_email:
+        address: Dirección de correo
