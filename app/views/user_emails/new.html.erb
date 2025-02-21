@@ -5,6 +5,32 @@
         <h2 class="title">
             Añade un correo desde el que enviarás tu información
         </h2 class="title">
+
+        <div>
+            <%= form_with(model: @user_email) do |form| %>
+                <% if @user_email.errors.any? %>
+                    <div style="color: red">
+                    <h2><%= pluralize(@user_email.errors.count, "error") %> prohibited this @user_email from being saved:</h2>
+
+                    <ul>
+                        <% @user_email.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                        <% end %>
+                    </ul>
+                    </div>
+                <% end %>
+
+                <div class="row mt-1">
+                    <div class="col-md-7 placeholder-grey">
+                        <%= form.text_field :address, class: "form-control placeholder-grey", placeholder: "Coloca tu correo", style: "background-color: #F6F6F6; border: none; font-size: 26px; border-radius: 15px;" %>
+                    </div>
+                    <div class="col-md-5">
+                        <%= form.submit "Guardar", style: "background-color: #F1F2F4; border: none; padding: 5px 29px; font-size: 17px; margin: 7px 0 0 15px; border-radius: 19px; box-shadow: 3px 3px 5px #d4d4d4;" %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+
     </div>
     <div class="pf-card mt-4">
         <h2 class="title">
