@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
 
     def update
         if @category.update(category_params)
-            redirect_to categories_path, notice: "La transacción fue actualizada con éxito."
+            redirect_to categories_path, notice: "La presupuesto fue actualizado con éxito."
         else
             render :edit, status: :unprocessable_entity
         end
