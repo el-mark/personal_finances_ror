@@ -5,6 +5,15 @@ class CategoriesController < ApplicationController
         @categories = current_user.categories
     end
 
+    def update_monthly_income
+        # binding.pry
+        if current_user.update(user_params)
+            redirect_to categories_path, notice: "Se actualizó el ingreso mensual con éxito"
+        else
+            render :index, status: :unprocessable_entity
+        end
+    end
+
     def update
         if @category.update(category_params)
             redirect_to categories_path, notice: "La presupuesto fue actualizado con éxito."
@@ -21,5 +30,9 @@ class CategoriesController < ApplicationController
 
     def category_params
         params.require(:category).permit(:budget)
-      end
+    end
+
+    def user_params
+        params.require(:user).permit(:monthly_income)
+    end
 end

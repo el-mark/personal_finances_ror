@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   resources :books
 
-  resources :categories, only: [ :index, :update ]
+  resources :categories, only: [ :index, :update ] do
+    patch "update_monthly_income", to: "update_monthly_income", on: :collection
+  end
 
   # index
   get "landing", to: "index#landing"
