@@ -40,5 +40,7 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
     registrations: "users/registrations"
   }
+
+  resources :user_emails, only: [ :new, :create, :destroy ]
 end
 # rubocop:enable Style/FrozenStringLiteralComment

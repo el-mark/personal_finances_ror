@@ -1,7 +1,13 @@
 <% content_for :title, "Tus movimientos" %>
 
-<h1>Tus movimientos</h1>
+<div style="max-width: 900px; margin: auto;">
+    <div class="pf-card mt-4  mb-4">
+        <h2 class="title">
+            Transacciones <i class="bi bi-chevron-right"></i>
+        </h2 class="title">
 
-<%= render "transactions_table", transactions: @transactions %>
+        <%= render "transactions_table", transactions: @transactions %>
 
-<%= link_to "Agregar movimiento", new_transaction_path, class: "btn btn-outline-success btn-sm mb-3" %>
+        <%= link_to "Agregar movimiento", new_transaction_path, class: "btn btn-outline-success btn-sm mt-3 mb-3" %>
+    </div>
+</div>
