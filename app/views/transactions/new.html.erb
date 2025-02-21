@@ -1,11 +1,16 @@
 <% content_for :title, "Agregar movimiento" %>
 
-<h1>Agregar movimiento</h1>
+<div style="max-width: 900px; margin: auto;">
+    <div class="pf-card mt-4  mb-4">
+        <h2 class="title">
+            Agregar movimiento
+        </h2 class="title">
 
-<%= render "form", transaction: @transaction %>
+        <%= render "form", transaction: @transaction %>
 
-<br>
+        <div>
+          <%= link_to "Regresar a movimientos", transactions_path %>
+        </div>
 
-<div>
-  <%= link_to "Regresar a movimientos", transactions_path %>
+    </div>
 </div>
