@@ -27,6 +27,30 @@
     }
 }
 
+.pf-spending-card {
+    border: 1px solid black;
+    border-radius: 33px;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    i {
+        font-size: 24px;
+        height: 33px;
+    }
+    .first-div {
+        width: 48%;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+    }
+    .percentage {
+        background-color: #F6F6F6;
+        font-size: 40px;
+        padding: 3px 15px;
+        border-radius: 20px;
+    }
+}
+
 main {
     color: #494955;
 }

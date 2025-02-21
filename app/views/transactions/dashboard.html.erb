@@ -28,7 +28,7 @@
                     </span>
                 <% else %>
                     <span style="position: absolute; width: 204px; font-size: 12px; bottom: 28px; background: #ffff002e; padding: 10px 14px; border-radius: 18px; z-index: 1; color: #00000091;">
-                        * Sobrepasaste tu presupuesto, estas consumiendo de ahorros
+                        * Sobrepasaste tu presupuesto de S/.<%= number_to_currency(@budget, precision: 0, unit: '') %>, estas consumiendo de ahorros
                     </span>
                 <% end %>
                 
