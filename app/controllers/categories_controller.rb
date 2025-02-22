@@ -3,6 +3,15 @@ class CategoriesController < ApplicationController
 
     def index
         @categories = current_user.categories
+
+        @budget = current_user.categories.sum(:budget).round
+        if current_user.monthly_income.present? && current_user.monthly_income.positive?
+            @savings = (
+                (current_user.monthly_income - @budget) / current_user.monthly_income.to_f * 100
+            ).round
+        else
+            @savings = 0
+        end
     end
 
     def update_monthly_income
