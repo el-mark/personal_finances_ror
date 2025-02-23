@@ -2,6 +2,10 @@ es:
   hello: "Hola mundo"
   activerecord:
     attributes:
+      category:
+        type_of_expenses:
+          essential: Necesidad
+          optional: Gusto
       transaction:
         transaction_date: Fecha
         transaction_code: Código

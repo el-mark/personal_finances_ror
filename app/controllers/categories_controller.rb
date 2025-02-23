@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
     before_action :set_category, only: %i[ update ]
+    skip_before_action :verify_authenticity_token, only: [ :update ]
 
     def index
         @categories = current_user.categories
@@ -23,11 +24,18 @@ class CategoriesController < ApplicationController
         end
     end
 
+    # PATCH/PUT /categories/1 or /categories/1.json
     def update
         if @category.update(category_params)
-            redirect_to categories_path, notice: "La presupuesto fue actualizado con éxito."
+            respond_to do |format|
+                format.html { redirect_to categories_path, notice: "La categoría fue actualizada con éxito." }
+                format.json { render json: @category.id, status: :ok }
+            end
         else
-            render :edit, status: :unprocessable_entity
+            respond_to do |format|
+                format.html { render :edit, status: :unprocessable_entity }
+                format.json { render json: @transaction.errors, status: :unprocessable_entity }
+            end
         end
     end
 
@@ -38,7 +46,7 @@ class CategoriesController < ApplicationController
     end
 
     def category_params
-        params.require(:category).permit(:budget)
+        params.require(:category).permit(:budget, :type_of_expense)
     end
 
     def user_params
