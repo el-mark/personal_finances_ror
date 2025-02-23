@@ -4,48 +4,56 @@
     <thead>
         <tr>
             <th scope="col" class="d-none">ID</th>
-            <th scope="col"><%= t("activerecord.attributes.transaction.transaction_date") %></th>
+            <th scope="col" style="width: 60px;"><%= t("activerecord.attributes.transaction.transaction_date") %></th>
             <th scope="col" class="d-none"><%= t("activerecord.attributes.transaction.transaction_code") %></th>
-            <th scope="col"><%= t("activerecord.attributes.transaction.issuer") %></th>
+            <th scope="col" style="width: 68px;"><%= t("activerecord.attributes.transaction.issuer") %></th>
             <th scope="col" class="d-none"><%= t("activerecord.attributes.transaction.source") %></th>
-            <th scope="col"><%= t("activerecord.attributes.transaction.destination") %></th>
+            <th scope="col" style="width: 240px;"><%= t("activerecord.attributes.transaction.destination") %></th>
             <th scope="col"><%= t("activerecord.attributes.transaction.category") %></th>
             <th scope="col" class="d-none"><%= t("activerecord.attributes.transaction.frequency") %></th>
             <th scope="col"><%= t("activerecord.attributes.transaction.description") %></th>
             <th scope="col" class="d-none"><%= t("activerecord.attributes.transaction.currency") %></th>
-            <th scope="col"><%= t("activerecord.attributes.transaction.amount") %></th>
-            <th scope="col" style="width: 80px;">Acciones</th>
+            <th scope="col" style="width: 72px;"><%= t("activerecord.attributes.transaction.amount") %></th>
+            <th scope="col" style="width: 69px;">Acciones</th>
         </tr>
     </thead>
     <tbody>
+        <% old_date = Date.today %>
         <% transactions.each do |transaction| %>
             <tr>
                 <td class="d-none"><%= transaction.id %></td>
-                <td><%= transaction.transaction_date.strftime("%d/%m") %></td>
+                <td style="<%= old_date != transaction.transaction_date ? 'border-top: 1px #80808024 solid;' : ''%>">
+                    <% if old_date != transaction.transaction_date %>
+                        <%= transaction.transaction_date.strftime("%b %d").sub('Jan', 'Ene').sub('Apr', 'Abr').sub('Aug', 'Ago').sub('Dec', 'Dic') %>
+                    <% end %>
+                </td>
                 <td class="d-none"><%= transaction.transaction_code %></td>
-                <td><%= transaction.issuer %></td>
+                <td style="border-top: 1px #80808024 solid;"><%= transaction.issuer %></td>
                 <td class="d-none"><%= transaction.source %></td>
-                <td><%= transaction.destination %></td>
-                <td>
-                    <%= select_tag "category_#{transaction.id}", options_for_select(Transaction.categories.keys.sort_by { |category| t("activerecord.attributes.transaction.categories.#{category}") }.map { |category| [t("activerecord.attributes.transaction.categories.#{category}"), category] }, selected: transaction.category), class: "form-select form-select-sm change-category", data: transaction.id %>
+                <td style="border-top: 1px #80808024 solid;"><%= transaction.destination %></td>
+                <td style="border-top: 1px #80808024 solid;">
+                    <%= select_tag "category_#{transaction.id}", options_for_select(Transaction.categories.keys.sort_by { |category| t("activerecord.attributes.transaction.categories.#{category}") }.map { |category| [t("activerecord.attributes.transaction.categories.#{category}"), category] }, selected: transaction.category), class: "form-select form-select-sm change-category", data: transaction.id, style: "border: none; font-size: 12px;" %>
                 </td>
                 <td class="d-none">
                     <%= select_tag "frequency_#{transaction.id}", options_for_select(Transaction.frequencies.keys.map { |frequency| [t("activerecord.attributes.transaction.frequencies.#{frequency}"), frequency] }, selected: transaction.frequency), class: "form-select form-select-sm change-frequency", data: transaction.id %>
                 </td>
-                <td><%= transaction.description %></td>
+                <td style="border-top: 1px #80808024 solid;"><%= transaction.description %></td>
                 <td class="d-none"><%= transaction.currency %></td>
-                <td><%= transaction.currency == 'usd' ? '$ ' : 'S/. ' %><%= transaction.amount / 100.to_f %></td>
-                <td>
+                <td style="text-align: right; padding-right: 7px; border-top: 1px #80808024 solid;">
+                    <%= transaction.currency == 'usd' ? '$ ' : 'S/. ' %><%= transaction.amount / 100.to_f %>
+                </td>
+                <td style="border-top: 1px #80808024 solid;">
                     <div style="display: flex; justify-content: space-between;">
-                        <a href="<%= edit_transaction_path(transaction) %>" class="btn btn-outline-success btn-sm">
+                        <a href="<%= edit_transaction_path(transaction) %>" class="btn btn-outline-success btn-sm" style="padding-top: 0; border: none;">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
-                        <%= button_to transaction, method: :delete, class: "btn btn-outline-danger btn-sm", data: { turbo_confirm: 'deseas borrar?' } do %>
+                        <%= button_to transaction, method: :delete, class: "btn btn-outline-danger btn-sm", style: "padding-top: 0; border: none;", data: { turbo_confirm: 'deseas borrar?' } do %>
                             <i class="bi bi-trash3-fill"></i>
                         <% end %>
                     </div>
                 </td>
             </tr>
+            <% old_date = transaction.transaction_date %>
         <% end %>
     </tbody>
 </table>
