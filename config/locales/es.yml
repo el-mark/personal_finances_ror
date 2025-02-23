@@ -6,6 +6,9 @@ es:
         type_of_expenses:
           essential: Necesidad
           optional: Gusto
+        type_of_expenses_logo:
+          essential: "⚠️ Necesidad"
+          optional: "👍 Gusto"
       transaction:
         transaction_date: Fecha
         transaction_code: Código

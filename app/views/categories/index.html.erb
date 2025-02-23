@@ -112,7 +112,7 @@
                         <% end %>
                     </div>
                     <div class="col-md-4">
-                        <%= select_tag "type_of_expense_#{category.id}", options_for_select(Category.type_of_expenses.keys.map { |type_of_expense| [t("activerecord.attributes.category.type_of_expenses.#{type_of_expense}"), type_of_expense] }, selected: category.type_of_expense), prompt: "Por definir", class: "form-select form-select-sm change-type-of-expense", data: category.id %>
+                        <%= select_tag "type_of_expense_#{category.id}", options_for_select(Category.type_of_expenses.keys.map { |type_of_expense| [t("activerecord.attributes.category.type_of_expenses_logo.#{type_of_expense}"), type_of_expense] }, selected: category.type_of_expense), prompt: "Por definir", class: "form-select form-select-sm change-type-of-expense", data: category.id, style: "border: none; text-align: right;" %>
                     </div>
                 </div>
 
