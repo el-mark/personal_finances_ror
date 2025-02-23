@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
     skip_before_action :verify_authenticity_token, only: [ :update ]
 
     def index
-        @categories = current_user.categories
+        @categories = current_user.categories.order(name: :desc)
 
         @budget = current_user.categories.sum(:budget).round
         if current_user.monthly_income.present? && current_user.monthly_income.positive?
@@ -12,6 +12,26 @@ class CategoriesController < ApplicationController
             ).round
         else
             @savings = 0
+        end
+
+        @essential_categories = current_user.categories.where(type_of_expense: :essential).sum(:budget).round
+
+        if current_user.monthly_income.present? && current_user.monthly_income.positive?
+            @essential_percent = (
+                @essential_categories / current_user.monthly_income.to_f * 100
+            ).round
+        else
+            @essential_percent = 0
+        end
+
+        @optional_categories = current_user.categories.where(type_of_expense: :optional).sum(:budget).round
+
+        if current_user.monthly_income.present? && current_user.monthly_income.positive?
+            @optional_percent = (
+                @optional_categories / current_user.monthly_income.to_f * 100
+            ).round
+        else
+            @optional_percent = 0
         end
     end
 
