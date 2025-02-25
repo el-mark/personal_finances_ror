@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        <% old_date = Date.today %>
+        <% old_date = Date.today + 1.year %>
         <% transactions.each do |transaction| %>
             <tr>
                 <td class="d-none"><%= transaction.id %></td>
