@@ -9,12 +9,41 @@ class User < ApplicationRecord
   has_many :categories
 
   after_create :create_user_email
+  after_create :create_categories
+
+  validates :email, presence: true, uniqueness: true
 
   def full_name
     "#{self.name} #{self.last_name}".titleize
   end
 
   private
+
+  def create_categories
+    category_names = [
+      "other_category",
+      "supermarket",
+      "transference",
+      "health",
+      "investment",
+      "entertainment",
+      "home",
+      "services",
+      "transport",
+      "pet",
+      "charity",
+      "debts",
+      "delivery",
+      "subscriptions",
+      "clothing",
+      "education",
+      "travel"
+    ]
+
+    category_names.each do |name|
+      Category.create(name: name, budget: 200, user: self)
+    end
+  end
 
   def create_user_email
     unless UserEmail.find_by(address: self.email).present?

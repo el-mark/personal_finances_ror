@@ -254,10 +254,12 @@
             <%# Finanzas Personales %>
             <%# image_tag 'finances_logo_white.png', alt: '', width: 30, height: 30 %>
             
-            <% if current_user.name.present? %>
-                <%= current_user.full_name %>
-            <% else %>
-                <%= current_user.email %>
+            <% if current_user.present? %>
+                <% if current_user.name.present? %>
+                    <%= current_user.full_name %>
+                <% else %>
+                    <%= current_user.email %>
+                <% end %>
             <% end %>
             
         </span>
