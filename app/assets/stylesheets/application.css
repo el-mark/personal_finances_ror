@@ -44,7 +44,7 @@
         flex-direction: column;
     }
     .percentage {
-        background-color: #F6F6F6;
+        /* background-color: #F6F6F6; */
         font-size: 40px;
         padding: 3px 15px;
         border-radius: 20px;

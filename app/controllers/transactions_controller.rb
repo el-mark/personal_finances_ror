@@ -13,14 +13,18 @@ class TransactionsController < ApplicationController
     ).sum(:amount) / 100.to_f
 
     @transactions_by_category = Transaction.categories.keys.map do |category|
-      sum_mount = current_user.transactions.where(
+      sum_mount_pen = current_user.transactions.where(
         currency: :pen, transaction_date: Date.current.beginning_of_month..
       ).where(category: category).sum(:amount) / 100.to_f
 
-      next if sum_mount <= 0
+      sum_mount_usd = current_user.transactions.where(
+        currency: :usd, transaction_date: Date.current.beginning_of_month..
+      ).where(category: category).sum(:amount) / 100.to_f
+
+      next if (sum_mount_pen + sum_mount_usd) <= 0
 
       {
-        value: sum_mount,
+        value: (sum_mount_pen + sum_mount_usd * USD_TO_PEN).round(2),
         name: I18n.t("activerecord.attributes.transaction.categories.#{category}")
       }
     end.compact.sort_by { |transaction| -transaction[:value] }
@@ -128,7 +132,7 @@ class TransactionsController < ApplicationController
       currency: :usd, transaction_date: Date.current.beginning_of_month..
     ).sum(:amount) / 100.to_f
 
-    total_usd * 3.78 + total_pen
+    total_usd * USD_TO_PEN + total_pen
   end
 
   def common_sum
@@ -139,7 +143,7 @@ class TransactionsController < ApplicationController
       currency: :usd, frequency: :common, transaction_date: Date.current.beginning_of_month..
     ).sum(:amount) / 100.to_f
 
-    total_usd * 3.78 + total_pen
+    total_usd * USD_TO_PEN + total_pen
   end
 
   def rare_sum
@@ -150,6 +154,6 @@ class TransactionsController < ApplicationController
       currency: :usd, frequency: :rare, transaction_date: Date.current.beginning_of_month..
     ).sum(:amount) / 100.to_f
 
-    total_usd * 3.78 + total_pen
+    total_usd * USD_TO_PEN + total_pen
   end
 end
