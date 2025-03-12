@@ -52,6 +52,9 @@ class EmailToTransactionService
         # transaction_date = Date.parse(@json_data['fecha'])
         transaction_date = Date.parse(@json_data["fecha"])
 
+        # TODO
+        other_category_category = @user.categories.find_by(name: "other_category")
+
         Transaction.create(
             email: @email,
             user: @user,
@@ -63,7 +66,7 @@ class EmailToTransactionService
             currency: @json_data["moneda"].to_sym,
             amount: @json_data["monto"] * 100,
             frequency: :common,
-            category: @json_data["categoria"].to_sym,
+            category_id: other_category_category.id,
             description: @json_data["descripcion"]
         )
     end

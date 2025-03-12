@@ -6,7 +6,6 @@ class TransactionsByCategory
     end
 
     def call
-        # binding.pry
         amount = @user.transactions.where(
             currency: :pen, transaction_date: Date.current.beginning_of_month..
         ).where(category: @category.name).sum(:amount)

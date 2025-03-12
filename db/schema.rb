@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_12_215215) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_12_224458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -46,9 +46,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_215215) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.integer "category"
     t.integer "frequency"
     t.text "description"
+    t.bigint "category_id"
+    t.integer "category"
+    t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["email_id"], name: "index_transactions_on_email_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
@@ -79,6 +81,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_215215) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "transactions", "categories"
   add_foreign_key "transactions", "emails"
   add_foreign_key "transactions", "users"
   add_foreign_key "user_emails", "users"
