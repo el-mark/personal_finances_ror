@@ -66,7 +66,7 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.user = current_user
-
+    @transaction.amount = params[:transaction][:amount].to_d * 100
     if @transaction.save
       redirect_to transactions_path, notice: "La transacción fue creada con éxito."
     else
@@ -76,6 +76,7 @@ class TransactionsController < ApplicationController
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
   def update
+    @transaction.amount = params[:transaction][:amount].to_d * 100
     if @transaction.update(transaction_params)
       respond_to do |format|
         format.html { redirect_to transactions_path, notice: "La transacción fue actualizada con éxito." }
@@ -112,10 +113,13 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params.expect(:id))
   end
 
-  # Only allow a list of trusted parameters through.
+  def transaction_amount
+    params.require(:transaction).permit(:amount)
+  end
+
   def transaction_params
     params.require(:transaction).permit(
-      :amount, :transaction_date, :transaction_code, :issuer, :source,
+      :transaction_date, :transaction_code, :issuer, :source,
       :destination, :category, :frequency, :description, :currency
     )
   end

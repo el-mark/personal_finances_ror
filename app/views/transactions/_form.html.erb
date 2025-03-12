@@ -105,7 +105,7 @@
       <%= form.label :amount, style: "display: block", class: "col-form-label" %>
     </div>
     <div class="col-md-8">
-      <%= form.number_field :amount, class: "form-control" %>
+      <%= form.number_field :amount, value: @transaction.amount.to_f / 100, class: "form-control", step: "any" %>
     </div>
   </div>
 
