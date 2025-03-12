@@ -5,4 +5,5 @@ class Transaction < ApplicationRecord
 
     belongs_to :email, optional: true
     belongs_to :user
+    # belongs_to :category
 end
