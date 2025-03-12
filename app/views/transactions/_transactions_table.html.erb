@@ -40,7 +40,7 @@
                 <td style="border-top: 1px #80808024 solid;"><%= transaction.description %></td>
                 <td class="d-none"><%= transaction.currency %></td>
                 <td style="text-align: right; padding-right: 7px; border-top: 1px #80808024 solid;">
-                    <%= transaction.currency == 'usd' ? '$ ' : 'S/. ' %><%= transaction.amount / 100.to_f %>
+                    <%= transaction.currency == 'usd' ? '$ ' : 'S/. ' %><%= format('%.2f', transaction.amount / 100.to_f) %>
                 </td>
                 <td style="border-top: 1px #80808024 solid;">
                     <div style="display: flex; justify-content: space-between;">
