@@ -66,6 +66,7 @@ class EmailToTransactionService
             currency: @json_data["moneda"].to_sym,
             amount: @json_data["monto"] * 100,
             frequency: :common,
+            category: 0,
             category_id: other_category_category.id,
             description: @json_data["descripcion"]
         )
