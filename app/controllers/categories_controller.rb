@@ -66,7 +66,7 @@ class CategoriesController < ApplicationController
     end
 
     def category_params
-        params.require(:category).permit(:budget, :type_of_expense)
+        params.require(:category).permit(:name, :budget, :type_of_expense)
     end
 
     def user_params
