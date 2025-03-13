@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-    before_action :set_category, only: %i[ update ]
+    before_action :set_category, only: %i[ update destroy ]
     skip_before_action :verify_authenticity_token, only: [ :update ]
 
     def index
@@ -57,6 +57,13 @@ class CategoriesController < ApplicationController
                 format.json { render json: @transaction.errors, status: :unprocessable_entity }
             end
         end
+    end
+
+    def destroy
+        @category.transactions.update_all(category_id: nil)
+        @category.destroy!
+
+        redirect_to categories_path, status: :see_other, notice: "La categoría fue borrada con éxito."
     end
 
     private

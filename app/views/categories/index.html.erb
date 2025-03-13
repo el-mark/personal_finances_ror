@@ -109,7 +109,7 @@
                         <span style="font-size: 17px; line-height: 34px;">
                             <%# t("activerecord.attributes.transaction.categories.#{category.name}") %>
                             <%= form_for(category, local: true) do |form| %>
-                            <%= form.text_field :name, style: "border: 0; background-color: #F6F6F6; border-radius: 14px; padding: 5px 15px; text-align: right; width: 153px; font-size: 16px;" %>
+                            <%= form.text_field :name, style: "border: 0; background-color: #F6F6F6; border-radius: 14px; padding: 5px 15px; text-align: right; width: 153px; font-size: 16px; line-height: 24px;" %>
 
                             <%= button_tag(type: 'submit', class: 'btn btn btn-link', style: 'padding-top: 0; color: #808080;') do %>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
@@ -122,7 +122,7 @@
                     </div>
                     <div class="col-md-4">
                         <%= form_for(category, local: true) do |form| %>
-                            <%= form.text_field :budget, style: "border: 0; background-color: #F6F6F6; border-radius: 14px; padding: 5px 15px; text-align: right; width: 153px; font-size: 16px;" %>
+                            <%= form.number_field :budget, style: "border: 0; background-color: #F6F6F6; border-radius: 14px; padding: 5px 15px; text-align: right; width: 153px; font-size: 16px; line-height: 24px;", class: "pf-number-input" %>
 
                             <%= button_tag(type: 'submit', class: 'btn btn btn-link', style: 'padding-top: 0; color: #808080;') do %>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
@@ -132,8 +132,11 @@
                             <% end %>
                         <% end %>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="display: flex;">
                         <%= select_tag "type_of_expense_#{category.id}", options_for_select(Category.type_of_expenses.keys.map { |type_of_expense| [t("activerecord.attributes.category.type_of_expenses_logo.#{type_of_expense}"), type_of_expense] }, selected: category.type_of_expense), prompt: "Por definir", class: "form-select form-select-sm change-type-of-expense", data: category.id, style: "border: none; text-align: right;" %>
+                        <%= button_to category, method: :delete, class: "btn btn-outline-danger btn-sm", style: "border: none; margin-left: 10px;", data: { turbo_confirm: 'deseas borrar?' } do %>
+                            <i class="bi bi-trash3-fill" style="font-size: 16px;"></i>
+                        <% end %>
                     </div>
                 </div>
 

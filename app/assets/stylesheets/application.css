@@ -60,3 +60,14 @@ main {
     color: #494955;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input.pf-number-input::-webkit-outer-spin-button,
+input.pf-number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input.pf-number-input[type=number] {
+  -moz-appearance: textfield;
+}
