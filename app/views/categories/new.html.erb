@@ -1,0 +1,50 @@
+<% content_for :title, "Agregar movimiento" %>
+
+<div style="max-width: 900px; margin: auto;">
+    <div class="pf-card mt-4  mb-4">
+        <h1 class="title">
+            Agregar movimiento
+        </h1 class="title">
+
+        <%= form_with(model: @category) do |form| %>
+            <% if @category.errors.any? %>
+                <div style="color: red">
+                <p><%= pluralize(@category.errors.count, "error") %> impidieron que la categoría se guarde:</p>
+
+                <ul>
+                    <% @category.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                    <% end %>
+                </ul>
+                </div>
+            <% end %>
+            <div class="row align-items-center mt-1">
+                <div class="col-md-4">
+                <%= form.label :name, style: "display: block", class: "col-form-label" %>
+                </div>
+                <div class="col-md-8">
+                <%= form.text_field :name, class: "form-control" %>
+                </div>
+            </div>
+
+            <div class="row align-items-center mt-1 mb-3">
+                <div class="col-md-4">
+                <%= form.label :budget, style: "display: block", class: "col-form-label" %>
+                </div>
+                <div class="col-md-8">
+                <%= form.number_field :budget, class: "form-control", step: "any" %>
+                </div>
+            </div>
+
+            <div>
+                <%= form.submit "Guardar", class: "btn btn-success" %>
+            </div>
+            <% end %>
+
+
+        <div>
+          <%= link_to "Regresar a movimientos", transactions_path %>
+        </div>
+
+    </div>
+</div>

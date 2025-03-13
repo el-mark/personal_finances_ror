@@ -71,3 +71,9 @@ input.pf-number-input::-webkit-inner-spin-button {
 input.pf-number-input[type=number] {
   -moz-appearance: textfield;
 }
+
+.pf-number-input::before {
+    content: "s/.";
+    color: blue;
+    font-style: italic;
+  }

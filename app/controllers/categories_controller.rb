@@ -2,8 +2,22 @@ class CategoriesController < ApplicationController
     before_action :set_category, only: %i[ update destroy ]
     skip_before_action :verify_authenticity_token, only: [ :update ]
 
+    def new
+        @category = Category.new
+    end
+
+    def create
+        @category = Category.new(category_params)
+        @category.user = current_user
+        if @category.save
+        redirect_to categories_path, notice: "La categoría fue creada con éxito."
+        else
+        render :new, status: :unprocessable_entity
+        end
+    end
+
     def index
-        @categories = current_user.categories.order(name: :desc)
+        @categories = current_user.categories.order(:name)
 
         @budget = current_user.categories.sum(:budget).round
         if current_user.monthly_income.present? && current_user.monthly_income.positive?
