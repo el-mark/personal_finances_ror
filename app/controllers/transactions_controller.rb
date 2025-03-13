@@ -125,7 +125,7 @@ class TransactionsController < ApplicationController
   end
 
   def unprotected_transaction_params
-    params.require(:transaction).permit(:category, :frequency)
+    params.require(:transaction).permit(:category_id, :frequency)
   end
 
   def spending

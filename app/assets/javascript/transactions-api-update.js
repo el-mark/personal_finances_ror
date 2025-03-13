@@ -9,14 +9,14 @@ function change_category() {
     document.querySelectorAll('.change-category').forEach(function(element) {
         element.addEventListener('change', function() {
             const transactionId = element.getAttribute('data');
-            console.log(transactionId);
+            // console.log(transactionId);
             const value = this.value;
             fetch(`/transactions/${transactionId}/api_update`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ transaction: { category: value } }),
+                body: JSON.stringify({ transaction: { category_id: value } }),
             })
             .then(response => response.json())
             .then(data => console.log('Success:', data))
