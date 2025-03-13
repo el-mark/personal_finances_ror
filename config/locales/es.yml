@@ -16,6 +16,7 @@ es:
         source: Cargo
         destination: Destinatario
         category: Categoría
+        category_id: Categoría
         frequency: Recurrencia
         description: Descripción
         currency: Moneda

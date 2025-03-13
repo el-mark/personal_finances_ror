@@ -56,14 +56,13 @@
     </div>
   </div>
 
-  <%# TODO %>
-  <div class="row align-items-center mt-1 d-none">
+  <div class="row align-items-center mt-1">
     <div class="col-md-4">
-      <%= form.label :category, style: "display: block", class: "col-form-label" %>
+      <%= form.label :category_id, style: "display: block", class: "col-form-label" %>
     </div>
     <div class="col-md-8">
-      <%= form.select :category, 
-          Transaction.categories.keys.map { |category| [t("activerecord.attributes.transaction.categories.#{category}"), category] },
+      <%= form.select :category_id, 
+          current_user.categories.order(:name).pluck(:name, :id),
           {}, 
           { class: "form-select" } 
       %>

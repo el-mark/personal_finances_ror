@@ -21,21 +21,21 @@ class User < ApplicationRecord
 
   def create_categories
     category_names = [
-      "otras",
-      "supermercado",
-      "salud",
-      "inversión",
-      "entretenimiento",
-      "hogar",
-      "servicios",
-      "transporte",
-      "mascota",
-      "caridad",
-      "entrega",
-      "suscripciones",
-      "ropa",
-      "educación",
-      "viaje"
+      "Otras",
+      "Supermercado",
+      "Salud",
+      "Inversión",
+      "Entretenimiento",
+      "Hogar",
+      "Servicios",
+      "Transporte",
+      "Mascota",
+      "Caridad",
+      "Entrega",
+      "Suscripciones",
+      "Ropa",
+      "Educación",
+      "Viaje"
     ]
 
     category_names.each do |name|

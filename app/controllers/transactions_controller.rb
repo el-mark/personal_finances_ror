@@ -12,26 +12,22 @@ class TransactionsController < ApplicationController
       currency: :usd, transaction_date: Date.current.beginning_of_month..
     ).sum(:amount) / 100.to_f
 
-    @transactions_by_category = Transaction.categories.keys.map do |category|
-      sum_mount_pen = current_user.transactions.where(
+    @transactions_by_category = current_user.categories.map do |category|
+      sum_mount_pen = category.transactions.where(
         currency: :pen, transaction_date: Date.current.beginning_of_month..
-      ).where(category: category).sum(:amount) / 100.to_f
+      ).sum(:amount) / 100.to_f
 
-      sum_mount_usd = current_user.transactions.where(
+      sum_mount_usd = category.transactions.where(
         currency: :usd, transaction_date: Date.current.beginning_of_month..
-      ).where(category: category).sum(:amount) / 100.to_f
+      ).sum(:amount) / 100.to_f
 
       next if (sum_mount_pen + sum_mount_usd) <= 0
 
       {
         value: (sum_mount_pen + sum_mount_usd * USD_TO_PEN).round(2),
-        name: I18n.t("activerecord.attributes.transaction.categories.#{category}")
+        name: category.name
       }
-    end.compact.sort_by { |transaction| -transaction[:value] }
-
-    @categories = Transaction.categories.keys.map(&:to_s).map do |category|
-        I18n.t("activerecord.attributes.transaction.categories.#{category}")
-    end
+    end.compact.sort_by { |category| -category[:value] }
 
     @budget = current_user.categories.sum(:budget).round
     @spending = spending.round
@@ -120,7 +116,7 @@ class TransactionsController < ApplicationController
   def transaction_params
     params.require(:transaction).permit(
       :transaction_date, :transaction_code, :issuer, :source,
-      :destination, :category, :frequency, :description, :currency
+      :destination, :category, :category_id, :frequency, :description, :currency
     )
   end
 
