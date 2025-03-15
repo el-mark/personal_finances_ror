@@ -5,7 +5,8 @@ class EmailToTransactionService
     end
 
     def call
-        categories = Transaction.categories.keys.join(", ")
+        # categories = Transaction.categories.keys.join(", ")
+        categories = @user.categories.pluck(:name).join(", ")
 
         prompt =
             <<~PROMPT
@@ -47,28 +48,29 @@ class EmailToTransactionService
 
         parsed_message = message.gsub("```json", "").gsub("```", "")
 
-        @json_data = JSON.parse(parsed_message)
+        json_data = JSON.parse(parsed_message)
 
-        # transaction_date = Date.parse(@json_data['fecha'])
-        transaction_date = Date.parse(@json_data["fecha"])
+        # transaction_date = Date.parse(json_data['fecha'])
+        transaction_date = Date.parse(json_data["fecha"])
+        category = @user.categories.find_by(name: json_data["categoria"])
 
         # TODO
-        other_category_category = @user.categories.find_by(name: "other_category")
+        # other_category_category = @user.categories.find_by(name: "other_category")
 
         Transaction.create(
             email: @email,
             user: @user,
             transaction_date: transaction_date,
-            transaction_code: @json_data["codigo_de_operacion"],
-            issuer: @json_data["banco"],
-            source: @json_data["cuenta_cargo"],
-            destination: @json_data["cuenta_destino"],
-            currency: @json_data["moneda"].to_sym,
-            amount: @json_data["monto"] * 100,
+            transaction_code: json_data["codigo_de_operacion"],
+            issuer: json_data["banco"],
+            source: json_data["cuenta_cargo"],
+            destination: json_data["cuenta_destino"],
+            currency: json_data["moneda"].to_sym,
+            amount: json_data["monto"] * 100,
             frequency: :common,
             category: 0,
-            category_id: other_category_category.id,
-            description: @json_data["descripcion"]
+            category_id: category&.id,
+            description: json_data["descripcion"]
         )
     end
 
@@ -88,21 +90,21 @@ class EmailToTransactionService
 
         parsed_message = message.gsub("```json", "").gsub("```", "")
 
-        @json_data = JSON.parse(parsed_message)
+        json_data = JSON.parse(parsed_message)
 
-        # transaction_date = Date.parse(@json_data['fecha'])
-        transaction_date = Date.parse(@json_data['fecha'])
+        # transaction_date = Date.parse(json_data['fecha'])
+        transaction_date = Date.parse(json_data['fecha'])
 
         transaction = Transaction.create(
             email: @email,
             user: @user,
             transaction_date: transaction_date,
-            transaction_code: @json_data["codigo_de_operacion"],
-            issuer: @json_data["banco"],
-            source: @json_data["cuenta_cargo"],
-            destination: @json_data["cuenta_destino"],
-            currency: @json_data["moneda"].to_sym,
-            amount: @json_data["monto"] * 100
+            transaction_code: json_data["codigo_de_operacion"],
+            issuer: json_data["banco"],
+            source: json_data["cuenta_cargo"],
+            destination: json_data["cuenta_destino"],
+            currency: json_data["moneda"].to_sym,
+            amount: json_data["monto"] * 100
         )
     end
 end

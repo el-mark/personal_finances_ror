@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   def create_categories
     category_names = [
-      "Otras",
+      "Otros",
       "Supermercado",
       "Salud",
       "Inversión",
@@ -30,7 +30,7 @@ class User < ApplicationRecord
       "Servicios",
       "Transporte",
       "Mascota",
-      "Caridad",
+      "Regalo",
       "Entrega",
       "Suscripciones",
       "Ropa",
