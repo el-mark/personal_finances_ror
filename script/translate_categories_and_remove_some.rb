@@ -15,7 +15,6 @@
 #     user.categories.find_by(name: "education")&.update(name: "Educación")
 #     user.categories.find_by(name: "travel")&.update(name: "Viajes")
     
-    
 #     other_cat = user.categories.find_by(name: "Otros")
 #     transference_cat = user.categories.find_by(name: "transference")
 #     Transaction.where(category_id: transference_cat.id).update_all(category_id: other_cat.id)
