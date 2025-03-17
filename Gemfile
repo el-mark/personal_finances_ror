@@ -69,8 +69,11 @@ group :test do
   gem "selenium-webdriver"
 end
 
-
 gem 'pg'
 gem "ruby-openai"
 gem 'devise'
 gem 'rails-i18n'
+
+gem "stackprof"
+gem "sentry-rails"
+gem "sentry-ruby"

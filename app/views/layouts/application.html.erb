@@ -112,6 +112,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
     <%= stylesheet_link_tag 'dashboard' %> <!-- Added this line -->
 
+    <%= Sentry.get_trace_propagation_meta.html_safe %>
   </head>
 
   <body style="background-color: #F8F8F8;">
