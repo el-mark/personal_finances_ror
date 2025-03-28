@@ -8,6 +8,7 @@ class EmailToTransactionService
         # categories = Transaction.categories.keys.join(", ")
         categories = @user.categories.pluck(:name).join(", ")
 
+        # TODO currencies from transaction enum
         prompt =
             <<~PROMPT
                 transform this transaction email text
@@ -26,7 +27,7 @@ class EmailToTransactionService
                     descripcion: 'Transferencia a Juan Perez'
                 }
 
-                - moneda tiene que ser: pen, usd o no_currency.
+                - moneda tiene que ser: pen, usd, eur o no_currency.
                 - fecha es solo el año, mes y día, mas no la hora.
                 return only the json object.
                 - las categorías disponibles: #{categories}
